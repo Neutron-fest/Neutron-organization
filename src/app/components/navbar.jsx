@@ -46,7 +46,7 @@ export default function Navbar() {
           </span>
         </motion.div>
         <Button
-          className="bg-black outline-none cursor-pointer rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-xs sm:text-sm md:text-md px-2 sm:px-4"
+          className="bg-blue-600 outline-none cursor-pointer hover:bg-green-400 rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-xs sm:text-sm md:text-md px-2 sm:px-4"
           onClick={() => {
             setIsOpen(!isOpen);
             setMenu(isOpen ? "Menu" : "Close");

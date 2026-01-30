@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { Mail, MapPin } from "lucide-react";
+import { TextHoverEffect } from "@/components/ui/hover-footer";
 
 export default function Footer() {
   const quickLinks = [
@@ -57,12 +58,12 @@ export default function Footer() {
             <h4 className="text-white text-lg font-semibold mb-6">
               Quick Links
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 ">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                    className="text-gray-400 hover:text-white transition-colors duration-300 text-sm relative z-20 "
                   >
                     {link.name}
                   </a>
@@ -78,7 +79,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm"
                 >
                   All Events
                 </a>
@@ -86,7 +87,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm"
                 >
                   Competitions
                 </a>
@@ -94,7 +95,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm"
                 >
                   Workshops
                 </a>
@@ -102,7 +103,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm"
                 >
                   Exhibitions
                 </a>
@@ -120,7 +121,7 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
                 <a
                   href="mailto:neutron@gmail.com"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm break-all"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm break-all"
                 >
                   neutron@gmail.com
                 </a>
@@ -132,6 +133,11 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
+        {/* Text hover effect */}
+      <div className="lg:flex hidden h-[20rem]  relative -mt-60 z-10">
+        <TextHoverEffect text="Neutron" className="z-10" />
+      </div>
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-zinc-800">
@@ -156,6 +162,10 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+       
+
+
     </footer>
   );
 }
