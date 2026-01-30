@@ -46,14 +46,14 @@ function SimpleBarChart({ data, label }) {
             className="flex-1 flex flex-col items-center gap-2"
             initial={{ height: 0 }}
             whileInView={{ height: "auto" }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
+            transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
             viewport={{ once: true }}
           >
             <motion.div
-              className="w-full bg-gradient-to-t from-blue-500 to-blue-300 rounded-t-lg"
+              className="w-full bg-linear-to-t from-blue-500 to-blue-300 rounded-t-lg"
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: item.value / maxValue }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
               viewport={{ once: true }}
               style={{
                 height: "100%",
@@ -146,10 +146,10 @@ export default function Impact() {
             className="bg-zinc-900 rounded-3xl p-8 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
               <AnimatedCounter end={5000} suffix="+" />
             </h3>
             <p className="text-gray-400 text-lg">Participants</p>
@@ -159,10 +159,10 @@ export default function Impact() {
             className="bg-zinc-900 rounded-3xl p-8 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
               <AnimatedCounter end={50} suffix="+" />
             </h3>
             <p className="text-gray-400 text-lg">Events Organized</p>
@@ -172,10 +172,10 @@ export default function Impact() {
             className="bg-zinc-900 rounded-3xl p-8 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-pink-400 to-red-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-pink-400 to-red-500 bg-clip-text text-transparent mb-4">
               <AnimatedCounter end={100} suffix="+" />
             </h3>
             <p className="text-gray-400 text-lg">Partners & Sponsors</p>

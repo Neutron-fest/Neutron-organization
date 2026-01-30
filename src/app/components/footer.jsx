@@ -118,7 +118,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                <Mail className="w-5 h-5 text-blue-500 flex-0 mt-1" />
                 <a
                   href="mailto:neutron@gmail.com"
                   className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm break-all"
@@ -127,7 +127,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                <MapPin className="w-5 h-5 text-blue-500 flex-0 mt-1" />
                 <span className="text-gray-400 text-sm">India</span>
               </li>
             </ul>
@@ -135,9 +135,9 @@ export default function Footer() {
         </div>
 
         {/* Text hover effect */}
-      <div className="lg:flex hidden h-[20rem]  relative -mt-60 z-10">
-        <TextHoverEffect text="Neutron" className="z-10" />
-      </div>
+        <div className="lg:flex hidden h-80  relative -mt-60 z-10">
+          <TextHoverEffect text="Neutron" className="z-10" />
+        </div>
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-zinc-800">
@@ -162,10 +162,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-       
-
-
     </footer>
   );
 }

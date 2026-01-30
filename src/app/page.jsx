@@ -6,7 +6,7 @@ import Gallery from "./components/gallery";
 import Team from "./components/team";
 import Impact from "./components/impact";
 import Contact from "./components/contact";
-import Footer from "./components/footer";
+import Footer from "./components/footer-new";
 
 export default function Home() {
   return (

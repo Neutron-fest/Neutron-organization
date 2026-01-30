@@ -1,6 +1,7 @@
 "use client";
 import { LogoCarousel } from "@/components/ui/logo-carousel";
 import Image from "next/image";
+import { FallingPattern } from "@/components/ui/falling-pattern";
 
 // Logo component wrapper for images
 function LogoImage({ src, name }) {
@@ -155,12 +156,23 @@ export default function Sponsors() {
   return (
     <section
       id="sponsors"
-      className="w-screen min-h-screen bg-black flex flex-col justify-center items-center py-20"
+      className="relative w-screen min-h-screen bg-black flex flex-col justify-center items-center py-20 overflow-hidden"
     >
-      <h2 className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-center mb-16">
-        OUR SPONSORS
-      </h2>
-      <LogoCarousel columnCount={3} logos={sponsorLogos} />
+      <div className="absolute inset-0">
+        <FallingPattern
+          color="#ffffff"
+          backgroundColor="#000000"
+          duration={150}
+          blurIntensity="1em"
+          density={1}
+        />
+      </div>
+      <div className="relative z-10 w-full flex flex-col items-center">
+        <h2 className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-center mb-16">
+          OUR SPONSORS
+        </h2>
+        <LogoCarousel columnCount={5} logos={sponsorLogos} />
+      </div>
     </section>
   );
 }

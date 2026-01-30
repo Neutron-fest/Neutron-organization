@@ -146,9 +146,8 @@ export default function Team() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10 }}
               >
-                <div className="aspect-[3/4] relative overflow-hidden">
+                <div className="aspect-3/4 relative overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}

@@ -7,6 +7,8 @@ import { X } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { XIcon } from "lucide-react";
 import { MoveRight } from "lucide-react";
+import { Youtube } from "lucide-react";
+import { Linkedin } from "lucide-react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState("Menu");
@@ -46,7 +48,7 @@ export default function Navbar() {
           </span>
         </motion.div>
         <Button
-          className="bg-blue-600 outline-none cursor-pointer hover:bg-green-400 rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-xs sm:text-sm md:text-md px-2 sm:px-4"
+          className="bg-black outline-none cursor-pointer hover:bg-gray-800 rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-xs sm:text-sm md:text-md px-2 sm:px-4 border border-gray-600"
           onClick={() => {
             setIsOpen(!isOpen);
             setMenu(isOpen ? "Menu" : "Close");
@@ -108,27 +110,49 @@ export default function Navbar() {
               <p className="text-gray-400 text-base sm:text-lg md:text-[20px]">
                 Connect
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-fit">
-                <Button
-                  variant="ghost"
-                  className="my-2 w-fit border-[0.5px] cursor-pointer rounded-2xl text-xs sm:text-sm md:text-base"
-                  style={{
-                    borderColor: "gray",
-                  }}
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://www.instagram.com/neutronfest/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neutron-hud inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition-colors"
+                  aria-label="Instagram"
                 >
-                  <XIcon className="w-4 h-4 sm:w-5 sm:h-5" />X
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="my-2 w-fit border-[0.5px] cursor-pointer rounded-2xl text-xs sm:text-sm md:text-base"
-                  style={{
-                    borderColor: "gray",
-                  }}
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://x.com/neutronfest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neutron-hud inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition-colors"
+                  aria-label="X (Twitter)"
                 >
-                  {" "}
-                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Instagram
-                </Button>
+                  <svg
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.youtube.com/@neutronfest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neutron-hud inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition-colors"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/neutronfest/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neutron-hud inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
               </div>
             </div>
             <div className="flex flex-col gap-5">
