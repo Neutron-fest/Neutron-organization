@@ -3,10 +3,67 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Greater Theory Font */
+@font-face {
+  font-family: "Greater Theory";
+  src: url("/assets/fonts/greater_theory/GreaterTheory.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Telegraf Font Family */
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-Ultralight-BF6417cecc0fa38.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-UltralightOblique-BF6417cecc3df51.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-Regular-BF6417cecb5d571.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-RegularOblique-BF6417cecb668c7.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-Ultrabold-BF6417cecc5b1d9.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Telegraf";
+  src: url("/assets/fonts/telegraf-font-family-1769412049-0/PPTelegraf-UltraboldOblique-BF6417cecb61cb3.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+}
+
 * {
-  font-family: "Oswald", sans-serif;
+  font-family: "Telegraf", "Oswald", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
 }
 @custom-variant dark (&:is(.dark *));

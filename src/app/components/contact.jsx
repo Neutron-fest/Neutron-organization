@@ -45,13 +45,13 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-500 text-sm uppercase tracking-wider mb-4">
+          <p className="text-zinc-500 text-sm uppercase tracking-wider mb-4">
             CONTACT
           </p>
           <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             Interested in talking,
           </h2>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             let's do it.
           </h2>
         </motion.div>
@@ -59,7 +59,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form Section */}
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8 md:p-12 border border-zinc-800"
+            className="bg-black rounded-2xl p-8 md:p-12 border border-zinc-800"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -135,21 +135,21 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             {/* Email */}
-            <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
-              <p className="text-gray-500 text-sm uppercase tracking-wider mb-3">
+            <div className="bg-black rounded-2xl p-8 border border-zinc-800">
+              <p className="text-zinc-500 text-sm uppercase tracking-wider mb-3">
                 EMAIL
               </p>
               <a
                 href="mailto:neutron@gmail.com"
-                className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+                className="text-2xl md:text-3xl font-semibold text-white hover:opacity-80 transition-opacity"
               >
                 neutron@gmail.com
               </a>
             </div>
 
             {/* Location */}
-            <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
-              <p className="text-gray-500 text-sm uppercase tracking-wider mb-3">
+            <div className="bg-black rounded-2xl p-8 border border-zinc-800">
+              <p className="text-zinc-500 text-sm uppercase tracking-wider mb-3">
                 LOCATION
               </p>
               <div className="flex items-center gap-2">
@@ -159,8 +159,8 @@ export default function Contact() {
             </div>
 
             {/* Connect */}
-            <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
-              <p className="text-gray-500 text-sm uppercase tracking-wider mb-4">
+            <div className="bg-black rounded-2xl p-8 border border-zinc-800">
+              <p className="text-zinc-500 text-sm uppercase tracking-wider mb-4">
                 CONNECT
               </p>
               <div className="flex flex-wrap gap-3">
@@ -193,14 +193,14 @@ export default function Contact() {
             </div>
 
             {/* Availability */}
-            <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
+            <div className="bg-black rounded-2xl p-8 border border-zinc-800">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <p className="text-green-500 font-semibold">
+                <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
+                <p className="text-white font-semibold">
                   Available for collaborations
                 </p>
               </div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-zinc-500 text-sm">
                 Open to partnerships, sponsorships, and exciting tech event
                 opportunities.
               </p>

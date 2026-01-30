@@ -50,7 +50,7 @@ function SimpleBarChart({ data, label }) {
             viewport={{ once: true }}
           >
             <motion.div
-              className="w-full bg-linear-to-t from-blue-500 to-blue-300 rounded-t-lg"
+              className="w-full bg-white rounded-t-lg"
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: item.value / maxValue }}
               transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
@@ -60,7 +60,7 @@ function SimpleBarChart({ data, label }) {
                 transformOrigin: "bottom",
               }}
             />
-            <span className="text-gray-400 text-xs mt-2">{item.label}</span>
+            <span className="text-zinc-500 text-xs mt-2">{item.label}</span>
           </motion.div>
         ))}
       </div>
@@ -86,23 +86,17 @@ function SimpleLineChart({ data, label }) {
               )
               .join(" ")}`}
             fill="none"
-            stroke="url(#gradient)"
+            stroke="#ffffff"
             strokeWidth="3"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             transition={{ duration: 2, ease: "easeInOut" }}
             viewport={{ once: true }}
           />
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3b82f6" />
-              <stop offset="100%" stopColor="#8b5cf6" />
-            </linearGradient>
-          </defs>
         </svg>
         <div className="flex justify-between mt-4">
           {["2020", "2021", "2022", "2023", "2024", "2025"].map((year, i) => (
-            <span key={i} className="text-gray-400 text-xs">
+            <span key={i} className="text-zinc-500 text-xs">
               {year}
             </span>
           ))}
@@ -143,49 +137,49 @@ export default function Impact() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8 text-center"
+            className="bg-black rounded-2xl p-8 text-center border border-zinc-800"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold text-white mb-4">
               <AnimatedCounter end={5000} suffix="+" />
             </h3>
-            <p className="text-gray-400 text-lg">Participants</p>
+            <p className="text-zinc-500 text-lg">Participants</p>
           </motion.div>
 
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8 text-center"
+            className="bg-black rounded-2xl p-8 text-center border border-zinc-800"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold text-white mb-4">
               <AnimatedCounter end={50} suffix="+" />
             </h3>
-            <p className="text-gray-400 text-lg">Events Organized</p>
+            <p className="text-zinc-500 text-lg">Events Organized</p>
           </motion.div>
 
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8 text-center"
+            className="bg-black rounded-2xl p-8 text-center border border-zinc-800"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h3 className="text-6xl md:text-7xl font-bold bg-linear-to-r from-pink-400 to-red-500 bg-clip-text text-transparent mb-4">
+            <h3 className="text-6xl md:text-7xl font-bold text-white mb-4">
               <AnimatedCounter end={100} suffix="+" />
             </h3>
-            <p className="text-gray-400 text-lg">Partners & Sponsors</p>
+            <p className="text-zinc-500 text-lg">Partners & Sponsors</p>
           </motion.div>
         </div>
 
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8"
+            className="bg-black rounded-2xl p-8 border border-zinc-800"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -198,7 +192,7 @@ export default function Impact() {
           </motion.div>
 
           <motion.div
-            className="bg-zinc-900 rounded-3xl p-8"
+            className="bg-black rounded-2xl p-8 border border-zinc-800"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}

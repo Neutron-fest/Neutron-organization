@@ -67,7 +67,7 @@ export default function Gallery() {
 
       <div
         ref={scrollRef}
-        className="h-[600px] overflow-hidden px-4 md:px-8 lg:px-12"
+        className="h-150 overflow-hidden px-4 md:px-8 lg:px-12"
         style={{ scrollBehavior: "auto" }}
       >
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 auto-rows-[150px] gap-4 pb-20">

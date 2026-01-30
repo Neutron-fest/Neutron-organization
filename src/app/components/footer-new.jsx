@@ -89,14 +89,14 @@ export default function Footer() {
     >
       {/* Background gradient glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-radial from-blue-500/10 via-purple-500/5 to-transparent blur-3xl"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent blur-3xl"></div>
       </div>
 
       {/* Large background text with hover effect */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
         <svg
           ref={svgRef}
-          className="w-full h-full max-w-[1200px]"
+          className="w-full h-full max-w-300"
           viewBox="0 0 600 120"
           preserveAspectRatio="xMidYMid meet"
         >
