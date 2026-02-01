@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Gallery() {
   const scrollRef = useRef(null);
@@ -30,24 +31,24 @@ export default function Gallery() {
 
   // Generate placeholder items with varied sizes for bento grid
   const galleryItems = [
-    { id: 1, size: "col-span-2 row-span-2" },
-    { id: 2, size: "col-span-1 row-span-1" },
-    { id: 3, size: "col-span-1 row-span-1" },
-    { id: 4, size: "col-span-1 row-span-2" },
-    { id: 5, size: "col-span-2 row-span-1" },
-    { id: 6, size: "col-span-1 row-span-1" },
-    { id: 7, size: "col-span-1 row-span-1" },
-    { id: 8, size: "col-span-2 row-span-2" },
-    { id: 9, size: "col-span-1 row-span-1" },
-    { id: 10, size: "col-span-1 row-span-2" },
-    { id: 11, size: "col-span-2 row-span-1" },
-    { id: 12, size: "col-span-1 row-span-1" },
-    { id: 13, size: "col-span-1 row-span-1" },
-    { id: 14, size: "col-span-2 row-span-2" },
-    { id: 15, size: "col-span-1 row-span-1" },
-    { id: 16, size: "col-span-1 row-span-2" },
-    { id: 17, size: "col-span-2 row-span-1" },
-    { id: 18, size: "col-span-1 row-span-1" },
+    { id: 1, size: "col-span-2 row-span-2", image: "https://picsum.photos/seed/neutron1/400/400" },
+    { id: 2, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron2/200/200" },
+    { id: 3, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron3/200/200" },
+    { id: 4, size: "col-span-1 row-span-2", image: "https://picsum.photos/seed/neutron4/200/400" },
+    { id: 5, size: "col-span-2 row-span-1", image: "https://picsum.photos/seed/neutron5/400/200" },
+    { id: 6, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron6/200/200" },
+    { id: 7, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron7/200/200" },
+    { id: 8, size: "col-span-2 row-span-2", image: "https://picsum.photos/seed/neutron8/400/400" },
+    { id: 9, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron9/200/200" },
+    { id: 10, size: "col-span-1 row-span-2", image: "https://picsum.photos/seed/neutron10/200/400" },
+    { id: 11, size: "col-span-2 row-span-1", image: "https://picsum.photos/seed/neutron11/400/200" },
+    { id: 12, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron12/200/200" },
+    { id: 13, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron13/200/200" },
+    { id: 14, size: "col-span-2 row-span-2", image: "https://picsum.photos/seed/neutron14/400/400" },
+    { id: 15, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron15/200/200" },
+    { id: 16, size: "col-span-1 row-span-2", image: "https://picsum.photos/seed/neutron16/200/400" },
+    { id: 17, size: "col-span-2 row-span-1", image: "https://picsum.photos/seed/neutron17/400/200" },
+    { id: 18, size: "col-span-1 row-span-1", image: "https://picsum.photos/seed/neutron18/200/200" },
   ];
 
   return (
@@ -56,7 +57,7 @@ export default function Gallery() {
       className="w-screen min-h-screen bg-black py-20 overflow-hidden"
     >
       <motion.h2
-        className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-center mb-16 px-4"
+        className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16 px-4"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -74,23 +75,35 @@ export default function Gallery() {
           {galleryItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className={`${item.size} bg-white rounded-2xl`}
+              className={`${item.size} bg-zinc-900 rounded-2xl overflow-hidden relative`}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-            />
+            >
+              <img
+                src={item.image}
+                alt={`Gallery image ${item.id}`}
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+              />
+            </motion.div>
           ))}
           {/* Duplicate items for infinite scroll effect */}
           {galleryItems.map((item, index) => (
             <motion.div
               key={`dup-${item.id}`}
-              className={`${item.size} bg-white rounded-2xl`}
+              className={`${item.size} bg-zinc-900 rounded-2xl overflow-hidden relative`}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-            />
+            >
+              <img
+                src={item.image}
+                alt={`Gallery image ${item.id}`}
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+              />
+            </motion.div>
           ))}
         </div>
       </div>

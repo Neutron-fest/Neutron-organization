@@ -48,10 +48,10 @@ export default function Contact() {
           <p className="text-zinc-500 text-sm uppercase tracking-wider mb-4">
             CONTACT
           </p>
-          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black">
             Interested in talking,
           </h2>
-          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black">
             let's do it.
           </h2>
         </motion.div>

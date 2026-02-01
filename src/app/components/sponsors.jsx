@@ -153,6 +153,10 @@ export default function Sponsors() {
     },
   ];
 
+  // Split logos into two groups for the two rows
+  const firstRowLogos = sponsorLogos.filter((_, index) => index % 2 === 0);
+  const secondRowLogos = sponsorLogos.filter((_, index) => index % 2 === 1);
+
   return (
     <section
       id="sponsors"
@@ -168,10 +172,13 @@ export default function Sponsors() {
         />
       </div>
       <div className="relative z-10 w-full flex flex-col items-center">
-        <h2 className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-center mb-16">
+        <h2 className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16">
           OUR SPONSORS
         </h2>
-        <LogoCarousel columnCount={5} logos={sponsorLogos} />
+        <LogoCarousel columnCount={5} logos={firstRowLogos} />
+        <div className="mt-8">
+          <LogoCarousel columnCount={5} logos={secondRowLogos} />
+        </div>
       </div>
     </section>
   );
