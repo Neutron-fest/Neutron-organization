@@ -2,6 +2,7 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { AnimatedHeading } from "@/components/ui/animated-heading";
 
 export default function Gallery() {
   const scrollRef = useRef(null);
@@ -56,15 +57,13 @@ export default function Gallery() {
       id="gallery"
       className="w-screen min-h-screen bg-black py-20 overflow-hidden"
     >
-      <motion.h2
+      <AnimatedHeading
         className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16 px-4"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        highlightWords={["Achieved"]}
+        highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
       >
         What We Have Achieved
-      </motion.h2>
+      </AnimatedHeading>
 
       <div
         ref={scrollRef}

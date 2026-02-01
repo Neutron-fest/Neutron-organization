@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "motion/react";
+import { AnimatedHeading } from "@/components/ui/animated-heading";
 
 export default function Team() {
   const teamMembers = [
@@ -58,15 +59,13 @@ export default function Team() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header Section */}
         <div className="mb-12">
-          <motion.h2
+          <AnimatedHeading
             className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            highlightWords={["Students", "possible"]}
+            highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
           >
             Students who made it possible
-          </motion.h2>
+          </AnimatedHeading>
           <motion.p
             className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl"
             initial={{ opacity: 0, y: 30 }}

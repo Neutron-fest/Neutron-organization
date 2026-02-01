@@ -2,6 +2,7 @@
 import { LogoCarousel } from "@/components/ui/logo-carousel";
 import Image from "next/image";
 import { FallingPattern } from "@/components/ui/falling-pattern";
+import { AnimatedText } from "@/components/ui/animated-heading";
 
 // Logo component wrapper for images
 function LogoImage({ src, name }) {
@@ -172,9 +173,12 @@ export default function Sponsors() {
         />
       </div>
       <div className="relative z-10 w-full flex flex-col items-center">
-        <h2 className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16">
+        <AnimatedText
+          className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16"
+          highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+        >
           OUR SPONSORS
-        </h2>
+        </AnimatedText>
         <LogoCarousel columnCount={5} logos={firstRowLogos} />
         <div className="mt-8">
           <LogoCarousel columnCount={5} logos={secondRowLogos} />

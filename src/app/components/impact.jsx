@@ -1,6 +1,7 @@
 "use client";
 import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll, useAnimationFrame } from "motion/react";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { AnimatedText } from "@/components/ui/animated-heading";
 
 // Noise texture overlay
 function NoiseOverlay() {
@@ -656,9 +657,12 @@ export default function Impact() {
               <LiveIndicator />
             </motion.div>
             
-            <h2 className="text-zinc-100 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
+            <AnimatedText
+              className="text-zinc-100 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight"
+              highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+            >
               Our Impact
-            </h2>
+            </AnimatedText>
           </div>
           
           <p className="text-zinc-500 text-sm max-w-sm md:text-right leading-relaxed">

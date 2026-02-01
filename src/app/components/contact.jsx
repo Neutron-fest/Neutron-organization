@@ -9,6 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useState } from "react";
+import { AnimatedHeading } from "@/components/ui/animated-heading";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -38,23 +39,25 @@ export default function Contact() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-zinc-500 text-sm uppercase tracking-wider mb-4">
+        <div className="mb-16">
+          <motion.p 
+            className="text-zinc-500 text-sm uppercase tracking-wider mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+          >
             CONTACT
-          </p>
-          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black">
+          </motion.p>
+          <AnimatedHeading
+            className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black"
+            highlightWords={["talking", "do"]}
+            highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+          >
             Interested in talking,
-          </h2>
-          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black">
-            let's do it.
-          </h2>
-        </motion.div>
+let's do it.
+          </AnimatedHeading>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form Section */}
