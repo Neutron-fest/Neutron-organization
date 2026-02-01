@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
+import About from "./components/about";
 import Sponsors from "./components/sponsors";
 import Gallery from "./components/gallery";
 import Team from "./components/team";
@@ -13,6 +13,7 @@ export default function Home() {
     <>
       <Hero />
       <Navbar />
+      <About />
       <Sponsors />
       <Gallery />
       <Team />
