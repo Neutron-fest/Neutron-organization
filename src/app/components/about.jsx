@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,22 +9,36 @@ gsap.registerPlugin(ScrollTrigger);
 export default function About() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const [activeSection, setActiveSection] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trackWidth = trackRef.current.scrollWidth;
-      const viewportWidth = window.innerWidth;
+      ScrollTrigger.matchMedia({
+        "(min-width: 768px)": () => {
+          const track = trackRef.current;
+          const section = sectionRef.current;
 
-      gsap.to(trackRef.current, {
-        x: -(trackWidth - viewportWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => `+=${trackWidth}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
+          if (!track || !section) return;
+
+          const tween = gsap.to(track, {
+            x: () => -(track.scrollWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: () => `+=${track.scrollWidth}`,
+              scrub: 1,
+              pin: true,
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+            },
+          });
+
+          ScrollTrigger.refresh();
+
+          return () => {
+            tween.kill();
+          };
         },
       });
     });
@@ -33,46 +47,105 @@ export default function About() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-[#1c1f17] text-white"
-    >
-      <div
-        ref={trackRef}
-        className="relative h-full flex"
-        style={{ width: "100vw" }}
+    <>
+      {/* Mobile Version */}
+      <section className="md:hidden relative min-h-screen w-full bg-black text-white py-12 px-6">
+        {/* Toggle Buttons */}
+        <div className="flex gap-4 mb-8">
+          <button
+            onClick={() => setActiveSection(0)}
+            className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
+              activeSection === 0
+                ? "bg-lime-400 text-black"
+                : "bg-gray-800 text-gray-400"
+            }`}
+          >
+            Qatar 2024
+          </button>
+          <button
+            onClick={() => setActiveSection(1)}
+            className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
+              activeSection === 1
+                ? "bg-lime-400 text-black"
+                : "bg-gray-800 text-gray-400"
+            }`}
+          >
+            Miami GP 2024
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-8">
+          {activeSection === 0 ? (
+            <>
+              <div>
+                <p className="text-xs tracking-widest text-gray-400 mb-4">
+                  QATAR, 2024
+                </p>
+                <h2 className="text-2xl leading-snug font-serif text-gray-100">
+                  It doesn't matter where you start. It's how you progress.
+                </h2>
+              </div>
+              <div className="w-full h-75 rounded-2xl bg-linear-to-br from-lime-400/80 to-emerald-600/80" />
+            </>
+          ) : (
+            <>
+              <div>
+                <p className="text-xs tracking-widest text-gray-400 mb-4">
+                  MIAMI GP, 2024
+                </p>
+                <h2 className="text-2xl leading-snug font-serif text-gray-100">
+                  Relentless iteration beats raw talent.
+                </h2>
+              </div>
+              <div className="w-full h-75 rounded-2xl bg-linear-to-br from-lime-400/80 to-emerald-600/80" />
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* Desktop Version */}
+      <section
+        ref={sectionRef}
+        className="hidden md:block relative h-screen w-full overflow-hidden bg-black text-white"
       >
-        {/* ================= SECTION 1 ================= */}
-        <div className="relative h-full w-screen">
-          <TextBlock
-            left="32vw"
-            top="25vh"
-            title="QATAR, 2024"
-            text="It doesn't matter where you start. It’s how you progress."
-          />
+        <div
+          ref={trackRef}
+          className="relative h-full flex"
+          style={{ width: "100vw" }}
+        >
+          {/* ================= SECTION 1 ================= */}
+          <div className="relative h-full w-screen">
+            <TextBlock
+              left="32vw"
+              top="25vh"
+              title="QATAR, 2024"
+              text="It doesn't matter where you start. It’s how you progress."
+            />
 
-          <ImageBlock left="8vw" top="15vh" size="wideSm" />
-          <ImageBlock left="20vw" top="65vh" size="wideSm" />
-          <ImageBlock left="50vw" top="55vh" size="wideSm" />
+            <ImageBlock left="8vw" top="15vh" size="wideSm" />
+            <ImageBlock left="20vw" top="65vh" size="wideSm" />
+            <ImageBlock left="50vw" top="55vh" size="wideSm" />
 
-          <ImageBlock left="75vw" top="14vh" size="mdTall" />
+            <ImageBlock left="75vw" top="14vh" size="mdTall" />
+          </div>
+
+          {/* ================= SECTION 2 ================= */}
+          <div className="relative h-full w-screen">
+            <TextBlock
+              left="65vw"
+              top="60vh"
+              title="MIAMI GP, 2024"
+              text="Relentless iteration beats raw talent."
+            />
+
+            <ImageBlock left="65vw" top="12vh" size="wideSm" />
+            <ImageBlock left="90vw" top="35vh" size="md" />
+            <ImageBlock left="118vw" top="16vh" size="wideSmTall" />
+          </div>
         </div>
-
-        {/* ================= SECTION 2 ================= */}
-        <div className="relative h-full w-screen">
-          <TextBlock
-            left="65vw"
-            top="60vh"
-            title="MIAMI GP, 2024"
-            text="Relentless iteration beats raw talent."
-          />
-
-          <ImageBlock left="65vw" top="12vh" size="wideSm" />
-          <ImageBlock left="90vw" top="35vh" size="md" />
-          <ImageBlock left="118vw" top="16vh" size="wideSmTall" />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

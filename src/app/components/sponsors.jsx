@@ -3,6 +3,7 @@ import { LogoCarousel } from "@/components/ui/logo-carousel";
 import Image from "next/image";
 import { FallingPattern } from "@/components/ui/falling-pattern";
 import { AnimatedText } from "@/components/ui/animated-heading";
+import { useState, useEffect } from "react";
 
 // Logo component wrapper for images
 function LogoImage({ src, name }) {
@@ -16,6 +17,18 @@ function LogoImage({ src, name }) {
 }
 
 export default function Sponsors() {
+  const [columnCount, setColumnCount] = useState(5);
+
+  useEffect(() => {
+    const updateColumnCount = () => {
+      setColumnCount(window.innerWidth < 768 ? 2 : 5);
+    };
+
+    updateColumnCount();
+    window.addEventListener("resize", updateColumnCount);
+    return () => window.removeEventListener("resize", updateColumnCount);
+  }, []);
+
   const sponsorLogos = [
     {
       name: "5Monkey",
@@ -179,9 +192,9 @@ export default function Sponsors() {
         >
           OUR SPONSORS
         </AnimatedText>
-        <LogoCarousel columnCount={5} logos={firstRowLogos} />
+        <LogoCarousel columnCount={columnCount} logos={firstRowLogos} />
         <div className="mt-8">
-          <LogoCarousel columnCount={5} logos={secondRowLogos} />
+          <LogoCarousel columnCount={columnCount} logos={secondRowLogos} />
         </div>
       </div>
     </section>
