@@ -18,6 +18,8 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState({ show: false, message: "", type: "" });
 
   const handleChange = (e) => {
     setFormData({
@@ -26,10 +28,45 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const showNotification = (message, type) => {
+    setNotification({ show: true, message, type });
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+    }, 5000);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        showNotification('Message sent successfully! We will get back to you soon.', 'success');
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        showNotification(result.message || 'Failed to send message. Please try again.', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showNotification('An error occurred. Please try again later.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,6 +74,22 @@ export default function Contact() {
       id="contact"
       className="w-screen min-h-screen bg-black py-20 px-4 md:px-8 lg:px-12"
     >
+      {/* Notification */}
+      {notification.show && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className={`fixed top-8 right-8 z-50 px-6 py-4 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500 text-white' 
+              : 'bg-red-500 text-white'
+          }`}
+        >
+          <p className="font-medium">{notification.message}</p>
+        </motion.div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="mb-16">
@@ -119,12 +172,13 @@ let's do it.
 
               <motion.button
                 type="submit"
-                className="w-full bg-white hover:bg-gray-200 text-black font-semibold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                className="w-full bg-white hover:bg-gray-200 text-black font-semibold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                Send Message
-                <ArrowRight className="w-5 h-5" />
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {!isSubmitting && <ArrowRight className="w-5 h-5" />}
               </motion.button>
             </form>
           </motion.div>
