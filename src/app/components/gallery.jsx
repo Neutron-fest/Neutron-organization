@@ -1,133 +1,63 @@
 "use client";
 import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
-
 import { AnimatedHeading } from "@/components/ui/animated-heading";
 
-export default function Gallery() {
-  const scrollRef = useRef(null);
+const galleryItems = [
+  { id: 1,  placement: { gridColumn: "1 / 3", gridRow: "1 / 3" }, image: "https://picsum.photos/seed/neutron1/400/400" },
+  { id: 2,  placement: { gridColumn: "3 / 4", gridRow: "1 / 2" }, image: "https://picsum.photos/seed/neutron2/200/200" },
+  { id: 3,  placement: { gridColumn: "4 / 5", gridRow: "1 / 2" }, image: "https://picsum.photos/seed/neutron3/200/200" },
+  { id: 4,  placement: { gridColumn: "5 / 7", gridRow: "1 / 3" }, image: "https://picsum.photos/seed/neutron4/400/400" },
+  { id: 5,  placement: { gridColumn: "3 / 5", gridRow: "2 / 3" }, image: "https://picsum.photos/seed/neutron5/400/200" },
+  { id: 6,  placement: { gridColumn: "1 / 3", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron6/400/200" },
+  { id: 7,  placement: { gridColumn: "3 / 4", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron7/200/200" },
+  { id: 8,  placement: { gridColumn: "4 / 5", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron8/200/200" },
+  { id: 9,  placement: { gridColumn: "5 / 6", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron9/200/200" },
+  { id: 10, placement: { gridColumn: "6 / 7", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron10/200/200" },
+];
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let scrollPos = 0;
-    const scroll = () => {
-      scrollPos += 0.5;
-      if (scrollContainer) {
-        scrollContainer.scrollTop = scrollPos;
-        // Seamless reset: when we've scrolled halfway (past original content), reset to start
-        const halfHeight = scrollContainer.scrollHeight / 2;
-        if (scrollPos >= halfHeight) {
-          scrollPos = 0;
-          scrollContainer.scrollTop = 0;
-        }
-      }
-    };
-
-    const intervalId = setInterval(scroll, 20);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  // Bento grid pattern optimized to avoid gaps
-  const galleryItems = [
-    {
-      id: 1,
-      size: "col-span-2 row-span-2",
-      image: "https://picsum.photos/seed/neutron1/400/400",
-    },
-    {
-      id: 2,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron2/200/200",
-    },
-    {
-      id: 3,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron3/200/200",
-    },
-    {
-      id: 4,
-      size: "col-span-2 row-span-1",
-      image: "https://picsum.photos/seed/neutron4/400/200",
-    },
-    {
-      id: 5,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron5/200/200",
-    },
-    {
-      id: 6,
-      size: "col-span-1 row-span-2",
-      image: "https://picsum.photos/seed/neutron6/200/400",
-    },
-    {
-      id: 7,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron7/200/200",
-    },
-    {
-      id: 8,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron8/200/200",
-    },
-    {
-      id: 9,
-      size: "col-span-2 row-span-2",
-      image: "https://picsum.photos/seed/neutron9/400/400",
-    },
-    {
-      id: 10,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron10/200/200",
-    },
-    {
-      id: 11,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron11/200/200",
-    },
-    {
-      id: 12,
-      size: "col-span-1 row-span-2",
-      image: "https://picsum.photos/seed/neutron12/200/400",
-    },
-    {
-      id: 13,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron13/200/200",
-    },
-    {
-      id: 14,
-      size: "col-span-2 row-span-1",
-      image: "https://picsum.photos/seed/neutron14/400/200",
-    },
-    {
-      id: 15,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron15/200/200",
-    },
-    {
-      id: 16,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron16/200/200",
-    },
-    {
-      id: 17,
-      size: "col-span-2 row-span-2",
-      image: "https://picsum.photos/seed/neutron17/400/400",
-    },
-    {
-      id: 18,
-      size: "col-span-1 row-span-1",
-      image: "https://picsum.photos/seed/neutron18/200/200",
-    },
-  ];
-
+function GalleryGrid({ idPrefix = "", animate = false }) {
   return (
-    <section
-      id="gallery"
-      className="w-screen min-h-screen bg-black py-20 overflow-hidden"
+    <div
+      className="grid grid-cols-6 gap-4"
+      style={{ gridTemplateRows: "repeat(3, 150px)" }}
     >
+      {galleryItems.map((item, index) =>
+        animate ? (
+          <motion.div
+            key={`${idPrefix}${item.id}`}
+            className="bg-zinc-900 overflow-hidden relative rounded-sm"
+            style={item.placement}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+          >
+            <img
+              src={item.image}
+              alt={`Gallery image ${item.id}`}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </motion.div>
+        ) : (
+          <div
+            key={`${idPrefix}${item.id}`}
+            className="bg-zinc-900 overflow-hidden relative rounded-sm"
+            style={item.placement}
+          >
+            <img
+              src={item.image}
+              alt={`Gallery image ${item.id}`}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+        )
+      )}
+    </div>
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section id="gallery" className="w-screen min-h-screen bg-black py-20 overflow-hidden">
       <AnimatedHeading
         className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16 px-4"
         highlightWords={["Achieved"]}
@@ -136,47 +66,27 @@ export default function Gallery() {
         What We Have Achieved
       </AnimatedHeading>
 
-      <div
-        ref={scrollRef}
-        className="h-150 overflow-hidden px-4 md:px-8 lg:px-12"
-        style={{ scrollBehavior: "auto" }}
-      >
-        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-6 auto-rows-[150px] gap-0 pb-20">
-          {galleryItems.map((item, index) => (
-            <motion.div
-              key={item.id}
-              className={`${item.size} bg-zinc-900 overflow-hidden relative`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
-            >
-              <img
-                src={item.image}
-                alt={`Gallery image ${item.id}`}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </motion.div>
-          ))}
-          {/* Duplicate items for infinite scroll effect */}
-          {galleryItems.map((item, index) => (
-            <motion.div
-              key={`dup-${item.id}`}
-              className={`${item.size} bg-zinc-900 overflow-hidden relative`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
-            >
-              <img
-                src={item.image}
-                alt={`Gallery image ${item.id}`}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </motion.div>
-          ))}
+      <div className="h-[482px] overflow-hidden px-4 md:px-8 lg:px-12 relative">
+        <div
+          className="flex flex-col gap-4 gallery-infinite-track"
+          aria-hidden="false"
+        >
+          <GalleryGrid idPrefix="a-" animate={true} />
+          <GalleryGrid idPrefix="b-" animate={false} />
         </div>
       </div>
+
+      <style>{`
+        .gallery-infinite-track {
+          animation: galleryScrollUp 28s linear infinite;
+          will-change: transform;
+        }
+
+        @keyframes galleryScrollUp {
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+      `}</style>
     </section>
   );
 }

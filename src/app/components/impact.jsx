@@ -827,7 +827,7 @@ export default function Impact() {
             viewport={{ once: true }}
           >
             <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-              <div className="md:w-48 flex-shrink-0">
+              <div className="md:w-48 shrink-0">
                 <h3 className="text-zinc-400 text-xs uppercase tracking-[0.15em] mb-2">Event Breakdown</h3>
                 <p className="text-zinc-600 text-xs">Distribution across event types</p>
               </div>
