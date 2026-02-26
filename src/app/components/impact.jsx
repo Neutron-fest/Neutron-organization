@@ -107,9 +107,9 @@ function Sparkline({ data, width = 80, height = 24, color = "#52525b" }) {
 }
 
 // Hero stat with large number
-function HeroStat({ value, suffix, label, trend, trendValue, sparkData }) {
+function HeroStat({ value, suffix, label, trend, trendValue, sparkData, accent = '#a1a1aa' }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
     <motion.div
       className="relative group cursor-default"
@@ -120,35 +120,73 @@ function HeroStat({ value, suffix, label, trend, trendValue, sparkData }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative bg-zinc-950/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-900/80 overflow-hidden transition-all duration-500 hover:border-zinc-800/80">
-        {/* Gradient line on hover */}
-        <motion.div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(161,161,170,0.3), transparent)' }}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: isHovered ? 1 : 0 }}
+      <div
+        className="relative rounded-2xl p-6 overflow-hidden transition-all duration-500"
+        style={{
+          background: '#0d0d0d',
+          border: `1px solid ${isHovered ? accent + '40' : 'rgba(39,39,42,0.8)'}`,
+          boxShadow: isHovered ? `0 0 40px 0 ${accent}18` : 'none',
+        }}
+      >
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
+          style={{ background: `linear-gradient(90deg, transparent, ${accent}80, transparent)` }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: isHovered ? 1 : 0.3, opacity: isHovered ? 1 : 0.4 }}
           transition={{ duration: 0.5 }}
         />
-        
-        <div className="flex items-start justify-between mb-4">
-          <span className="text-zinc-600 text-xs uppercase tracking-[0.15em]">{label}</span>
-          {sparkData && <Sparkline data={sparkData} />}
-        </div>
-        
-        <div className="flex items-end gap-3">
-          <h3 className="text-5xl md:text-6xl lg:text-7xl font-black text-zinc-100 tracking-tighter leading-none">
-            <RollingNumber value={value} suffix={suffix} />
-          </h3>
-          
-          {trend && (
-            <div className={`flex items-center gap-1 mb-2 ${trend === 'up' ? 'text-zinc-500' : 'text-zinc-600'}`}>
-              <svg className={`w-3 h-3 ${trend === 'up' ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-              </svg>
-              <span className="text-xs tabular-nums">{trendValue}</span>
-            </div>
+
+        <div
+          className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle, ${accent}22 0%, transparent 70%)`,
+            opacity: isHovered ? 1 : 0,
+          }}
+        />
+
+        <div className="flex items-start justify-between mb-5">
+          <div>
+            <span
+              className="text-[10px] uppercase tracking-[0.18em] font-medium"
+              style={{ color: accent + 'aa' }}
+            >
+              {label}
+            </span>
+          </div>
+          {sparkData && (
+            <Sparkline data={sparkData} color={accent} />
           )}
         </div>
+
+        <div className="mb-2">
+          <h3
+            className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
+            style={{ color: '#f4f4f5' }}
+          >
+            <RollingNumber value={value} suffix={suffix} />
+          </h3>
+        </div>
+
+        {trend && (
+          <span
+            className="inline-flex items-center gap-1 mt-3 px-2.5 py-1 rounded-full text-[10px] font-semibold tabular-nums"
+            style={{
+              background: accent + '18',
+              color: accent,
+              border: `1px solid ${accent}30`,
+            }}
+          >
+            <svg className="w-2.5 h-2.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            {trendValue}
+          </span>
+        )}
+
+        <div
+          className="mt-5 h-px"
+          style={{ background: `linear-gradient(90deg, ${accent}30, transparent)` }}
+        />
       </div>
     </motion.div>
   );
@@ -350,28 +388,38 @@ function AdvancedChart({ data }) {
               />
               
               {/* Tooltip */}
-              {activeIndex === i && (
-                <motion.g initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}>
-                  <rect
-                    x={point.x - 50}
-                    y={Math.min(point.y1, point.y2) - 55}
-                    width="100"
-                    height="45"
-                    rx="6"
-                    fill="#18181b"
-                    stroke="#27272a"
-                    strokeWidth="1"
-                  />
-                  <text x={point.x} y={Math.min(point.y1, point.y2) - 38} textAnchor="middle" fill="#a1a1aa" fontSize="10" fontWeight="500">
-                    {point.participants.toLocaleString()} participants
-                  </text>
-                  <text x={point.x} y={Math.min(point.y1, point.y2) - 22} textAnchor="middle" fill="#71717a" fontSize="10">
-                    {point.engagement.toLocaleString()} engaged
-                  </text>
-                </motion.g>
-              )}
+              {activeIndex === i && (() => {
+                const tooltipWidth = 110;
+                const tooltipHeight = 45;
+                const isRightSide = point.x > padding.left + innerWidth / 2;
+                const tooltipX = isRightSide
+                  ? point.x - tooltipWidth - 8
+                  : point.x + 8;
+                const rawY = Math.min(point.y1, point.y2) - tooltipHeight - 10;
+                const tooltipY = Math.max(padding.top, rawY);
+                const textX = tooltipX + tooltipWidth / 2;
+                return (
+                  <motion.g initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}>
+                    <rect
+                      x={tooltipX}
+                      y={tooltipY}
+                      width={tooltipWidth}
+                      height={tooltipHeight}
+                      rx="6"
+                      fill="#18181b"
+                      stroke="#27272a"
+                      strokeWidth="1"
+                    />
+                    <text x={textX} y={tooltipY + 17} textAnchor="middle" fill="#a1a1aa" fontSize="10" fontWeight="500">
+                      {point.participants.toLocaleString()} participants
+                    </text>
+                    <text x={textX} y={tooltipY + 33} textAnchor="middle" fill="#71717a" fontSize="10">
+                      {point.engagement.toLocaleString()} engaged
+                    </text>
+                  </motion.g>
+                );
+              })()}
               
-              {/* X-axis labels */}
               <text
                 x={point.x}
                 y={chartHeight - 15}
@@ -639,7 +687,7 @@ export default function Impact() {
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-24"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-24"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -665,7 +713,7 @@ export default function Impact() {
             </AnimatedText>
           </div>
           
-          <p className="text-zinc-500 text-sm max-w-sm md:text-right leading-relaxed">
+          <p className="text-zinc-500 text-sm max-w-full md:max-w-sm md:text-right leading-relaxed">
             Real-time metrics tracking our community growth and engagement across all platforms.
           </p>
         </motion.div>
@@ -673,35 +721,41 @@ export default function Impact() {
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {/* Hero Stats - Row 1 */}
-          <HeroStat 
-            value={5000} 
-            suffix="+" 
+          <HeroStat
+            value={5000}
+            suffix="+"
             label="Total Participants"
             trend="up"
             trendValue="+23%"
             sparkData={[500, 1200, 2100, 3500, 5200, 7000]}
+            accent="#818cf8"
           />
-          <HeroStat 
-            value={50} 
-            suffix="+" 
+          <HeroStat
+            value={50}
+            suffix="+"
             label="Events Organized"
             trend="up"
             trendValue="+12"
             sparkData={[8, 15, 24, 35, 42, 50]}
+            accent="#34d399"
           />
-          <HeroStat 
-            value={100} 
-            suffix="+" 
+          <HeroStat
+            value={100}
+            suffix="+"
             label="Partners & Sponsors"
             sparkData={[20, 35, 52, 70, 85, 100]}
+            trendValue="+10"
+            trend="up"
+            accent="#fbbf24"
           />
-          <HeroStat 
-            value={25} 
-            suffix="" 
+          <HeroStat
+            value={25}
+            suffix=""
             label="Countries Reached"
             trend="up"
             trendValue="+5"
             sparkData={[3, 7, 12, 16, 20, 25]}
+            accent="#f472b6"
           />
           
           {/* Main Chart - Row 2 */}

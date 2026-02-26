@@ -49,59 +49,123 @@ export default function About() {
   return (
     <>
       {/* Mobile Version */}
-      <section className="md:hidden relative min-h-screen w-full bg-black text-white py-12 px-6">
-        {/* Toggle Buttons */}
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => setActiveSection(0)}
-            className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
-              activeSection === 0
-                ? "bg-lime-400 text-black"
-                : "bg-gray-800 text-gray-400"
-            }`}
-          >
-            Qatar 2024
-          </button>
-          <button
-            onClick={() => setActiveSection(1)}
-            className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
-              activeSection === 1
-                ? "bg-lime-400 text-black"
-                : "bg-gray-800 text-gray-400"
-            }`}
-          >
-            Miami GP 2024
-          </button>
+      <section className="md:hidden relative w-full bg-black text-white overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        <div className="sticky top-0 z-20 bg-black/90 backdrop-blur-md border-b border-white/5 px-5 pt-6 pb-4">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 mb-3">Our Events</p>
+          <div className="flex gap-3">
+            {["Qatar 2024", "Miami GP 2024"].map((label, i) => (
+              <button
+                key={label}
+                onClick={() => setActiveSection(i)}
+                className={`relative flex-1 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 overflow-hidden ${
+                  activeSection === i ? "text-black" : "text-zinc-500 bg-zinc-900/60 border border-zinc-800"
+                }`}
+              >
+                {activeSection === i && (
+                  <span
+                    className="absolute inset-0 rounded-xl"
+                    style={{ background: "linear-gradient(135deg, #a3e635 0%, #4ade80 100%)" }}
+                  />
+                )}
+                <span className="relative z-10">{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="space-y-8">
+        <div className="relative px-5 pt-10 pb-16">
           {activeSection === 0 ? (
-            <>
-              <div>
-                <p className="text-xs tracking-widest text-gray-400 mb-4">
-                  QATAR, 2024
-                </p>
-                <h2 className="text-2xl leading-snug font-serif text-gray-100">
-                  It doesn't matter where you start. It's how you progress.
+            <div className="space-y-10">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8" style={{ background: "linear-gradient(90deg, #a3e635, transparent)" }} />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 font-medium">Qatar · 2024</span>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -top-6 -left-2 text-[120px] leading-none font-black select-none pointer-events-none" style={{ color: "rgba(163,230,53,0.06)" }}>"</span>
+                <h2 className="relative text-[2rem] leading-[1.15] font-black tracking-tight text-white">
+                  It doesn&apos;t matter where you{" "}
+                  <span style={{ background: "linear-gradient(135deg,#a3e635,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>start.</span>{" "}
+                  It&apos;s how you{" "}
+                  <span className="italic" style={{ background: "linear-gradient(135deg,#ffffff,#a1a1aa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>progress.</span>
                 </h2>
               </div>
-              <div className="w-full h-75 rounded-2xl bg-linear-to-br from-lime-400/80 to-emerald-600/80" />
-            </>
+
+              <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden">
+                <div className="absolute inset-0 rounded-2xl z-10 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(163,230,53,0.25)" }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#1a2e05 0%,#14532d 40%,#052e16 100%)" }} />
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.3) 2px,rgba(0,0,0,0.3) 4px)" }} />
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5">
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/80">Live event</span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 z-20 px-5 py-4" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
+                  <p className="text-white font-black tracking-tight text-xl">DOHA</p>
+                  <p className="text-lime-400/60 text-[10px] uppercase tracking-widest">Qatar · Nov 2024</p>
+                </div>
+              </div>
+
+              <div className="overflow-hidden -mx-5">
+                <div className="flex gap-4 w-max" style={{ animation: "about-scroll-x 18s linear infinite" }}>
+                  {["Innovation","Leadership","Networking","Growth","Technology","Community","Innovation","Leadership","Networking","Growth"].map((t, i) => (
+                    <span key={i} className="shrink-0 text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-zinc-800 text-zinc-500">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ) : (
-            <>
-              <div>
-                <p className="text-xs tracking-widest text-gray-400 mb-4">
-                  MIAMI GP, 2024
-                </p>
-                <h2 className="text-2xl leading-snug font-serif text-gray-100">
-                  Relentless iteration beats raw talent.
+            <div className="space-y-10">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8" style={{ background: "linear-gradient(90deg, #a3e635, transparent)" }} />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 font-medium">Miami GP · 2024</span>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -top-6 -left-2 text-[120px] leading-none font-black select-none pointer-events-none" style={{ color: "rgba(163,230,53,0.06)" }}>"</span>
+                <h2 className="relative text-[2rem] leading-[1.15] font-black tracking-tight text-white">
+                  Relentless{" "}
+                  <span className="italic" style={{ background: "linear-gradient(135deg,#a3e635,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>iteration</span>{" "}
+                  beats{" "}
+                  <span style={{ background: "linear-gradient(135deg,#ffffff,#a1a1aa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>raw talent.</span>
                 </h2>
               </div>
-              <div className="w-full h-75 rounded-2xl bg-linear-to-br from-lime-400/80 to-emerald-600/80" />
-            </>
+
+              <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden">
+                <div className="absolute inset-0 rounded-2xl z-10 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(163,230,53,0.25)" }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#0c1a05 0%,#052e16 50%,#1a0a2e 100%)" }} />
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.3) 2px,rgba(0,0,0,0.3) 4px)" }} />
+                <div className="absolute inset-0 opacity-25" style={{ background: "repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(163,230,53,0.04) 12px,rgba(163,230,53,0.04) 24px)" }} />
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-lime-400" />
+                  </span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/80">Live event</span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 z-20 px-5 py-4" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
+                  <p className="text-white font-black tracking-tight text-xl">MIAMI</p>
+                  <p className="text-lime-400/60 text-[10px] uppercase tracking-widest">Florida · GP 2024</p>
+                </div>
+              </div>
+
+              <div className="overflow-hidden -mx-5">
+                <div className="flex gap-4 w-max" style={{ animation: "about-scroll-x 18s linear infinite reverse" }}>
+                  {["Speed","Precision","Engineering","Vision","Racing","Innovation","Speed","Precision","Engineering","Vision"].map((t, i) => (
+                    <span key={i} className="shrink-0 text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-zinc-800 text-zinc-500">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
         </div>
+
+        <style>{`@keyframes about-scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
       </section>
 
       {/* Desktop Version */}

@@ -21,10 +21,15 @@ export default function Hero() {
       {/* STICKY VIEWPORT */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
         {/* NEUTRON TEXT (BEHIND VIDEO) */}
-        <div className="absolute inset-0 z-5 flex items-center justify-center">
+        <div className="absolute inset-0 z-5 flex items-center justify-center overflow-hidden w-full px-0">
           <motion.h1
-            className="text-[28vw] sm:text-[26vw] md:text-[24vw] lg:text-[21vw] font-black text-white tracking-tighter whitespace-nowrap"
-            style={{ fontFamily: "Greater Theory", opacity, scale }}
+            className="font-black text-white tracking-tighter whitespace-nowrap w-full text-center"
+            style={{
+              fontFamily: "Greater Theory",
+              opacity,
+              scale,
+              fontSize: "clamp(2.5rem, 18vw, 16vw)",
+            }}
           >
             NEUTRON
           </motion.h1>
