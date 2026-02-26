@@ -28,6 +28,7 @@ export default function Contact() {
     });
   };
 
+  // message Sent Notification
   const showNotification = (message, type) => {
     setNotification({ show: true, message, type });
     setTimeout(() => {
@@ -35,6 +36,8 @@ export default function Contact() {
     }, 5000);
   };
 
+
+  // nodemailer integration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
