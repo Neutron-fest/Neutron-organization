@@ -38,7 +38,7 @@ export default function Footer() {
   };
 
   const quickLinks = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "#" },
     { name: "Sponsors", href: "#sponsors" },
     { name: "Gallery", href: "#gallery" },
     { name: "Team", href: "#team" },
@@ -46,12 +46,6 @@ export default function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
-  const eventLinks = [
-    { name: "All Events", href: "#" },
-    { name: "Competitions", href: "#" },
-    { name: "Workshops", href: "#" },
-    { name: "Exhibitions", href: "#" },
-  ];
 
   const socialLinks = [
     {
@@ -179,23 +173,6 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Events */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Events</h4>
-            <ul className="space-y-2">
-              {eventLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}

@@ -18,7 +18,7 @@ function NoiseOverlay() {
 // Animated number with rolling effect
 function RollingNumber({ value, suffix = "" }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [displayed, setDisplayed] = useState(0);
   
   useEffect(() => {
@@ -160,7 +160,7 @@ function HeroStat({ value, suffix, label, trend, trendValue, sparkData, accent =
 
         <div className="mb-2">
           <h3
-            className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
             style={{ color: '#f4f4f5' }}
           >
             <RollingNumber value={value} suffix={suffix} />
@@ -200,7 +200,7 @@ function AdvancedChart({ data }) {
   
   const chartWidth = 500;
   const chartHeight = 280;
-  const padding = { top: 40, right: 20, bottom: 50, left: 50 };
+  const padding = { top: 40, right: 20, bottom: 50, left: 60 };
   
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
@@ -242,34 +242,36 @@ function AdvancedChart({ data }) {
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h3 className="text-zinc-200 text-lg font-medium mb-1">Growth Overview</h3>
+          <h3 className="text-zinc-200 text-base sm:text-lg font-medium mb-1">Growth Overview</h3>
           <p className="text-zinc-600 text-xs">Participation vs Engagement metrics</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button
-            className={`flex items-center gap-2 text-xs transition-colors ${hoveredSeries === 'participants' || !hoveredSeries ? 'text-zinc-400' : 'text-zinc-700'}`}
+            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === 'participants' || !hoveredSeries ? 'text-zinc-400' : 'text-zinc-700'}`}
             onMouseEnter={() => setHoveredSeries('participants')}
             onMouseLeave={() => setHoveredSeries(null)}
           >
-            <span className="w-3 h-[2px] bg-zinc-400" />
-            Participants
+            <span className="w-2.5 sm:w-3 h-[2px] bg-zinc-400" />
+            <span className="hidden xs:inline sm:inline">Participants</span>
+            <span className="inline xs:hidden sm:hidden">Part.</span>
           </button>
           <button
-            className={`flex items-center gap-2 text-xs transition-colors ${hoveredSeries === 'engagement' || !hoveredSeries ? 'text-zinc-600' : 'text-zinc-800'}`}
+            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === 'engagement' || !hoveredSeries ? 'text-zinc-600' : 'text-zinc-800'}`}
             onMouseEnter={() => setHoveredSeries('engagement')}
             onMouseLeave={() => setHoveredSeries(null)}
           >
-            <span className="w-3 h-[2px] bg-zinc-600 opacity-60" />
-            Engagement
+            <span className="w-2.5 sm:w-3 h-[2px] bg-zinc-600 opacity-60" />
+            <span className="hidden xs:inline sm:inline">Engagement</span>
+            <span className="inline xs:hidden sm:hidden">Eng.</span>
           </button>
         </div>
       </div>
       
       {/* Chart */}
-      <div className="flex-1 relative" ref={chartRef}>
-        <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="xMidYMid meet">
+      <div className="flex-1 relative min-h-[250px] sm:min-h-[280px]" ref={chartRef}>
+        <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="xMinYMid meet">
           <defs>
             <linearGradient id="participantsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="rgba(161, 161, 170, 0.15)" />
@@ -546,9 +548,11 @@ function RadarChart({ data }) {
 }
 
 // Animated progress ring
-function ProgressRing({ value, label, sublabel, size = 120 }) {
-  const strokeWidth = 8;
-  const radius = (size - strokeWidth) / 2;
+function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const actualSize = isMobile ? mobileSize : size;
+  const strokeWidth = isMobile ? 6 : 8;
+  const radius = (actualSize - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   
   return (
@@ -560,18 +564,18 @@ function ProgressRing({ value, label, sublabel, size = 120 }) {
       viewport={{ once: true }}
     >
       <div className="relative">
-        <svg width={size} height={size} className="transform -rotate-90">
+        <svg width={actualSize} height={actualSize} className="transform -rotate-90">
           <circle
-            cx={size / 2}
-            cy={size / 2}
+            cx={actualSize / 2}
+            cy={actualSize / 2}
             r={radius}
             fill="none"
             stroke="#1c1c1c"
             strokeWidth={strokeWidth}
           />
           <motion.circle
-            cx={size / 2}
-            cy={size / 2}
+            cx={actualSize / 2}
+            cy={actualSize / 2}
             r={radius}
             fill="none"
             stroke="#52525b"
@@ -585,12 +589,12 @@ function ProgressRing({ value, label, sublabel, size = 120 }) {
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-zinc-200 text-2xl font-light tabular-nums">{value}%</span>
+          <span className="text-zinc-200 text-xl sm:text-2xl font-light tabular-nums">{value}%</span>
         </div>
       </div>
-      <div className="mt-4 text-center">
-        <p className="text-zinc-400 text-sm">{label}</p>
-        {sublabel && <p className="text-zinc-600 text-xs mt-0.5">{sublabel}</p>}
+      <div className="mt-3 sm:mt-4 text-center">
+        <p className="text-zinc-400 text-xs sm:text-sm">{label}</p>
+        {sublabel && <p className="text-zinc-600 text-[10px] sm:text-xs mt-0.5">{sublabel}</p>}
       </div>
     </motion.div>
   );
@@ -608,9 +612,9 @@ function HorizontalMetric({ label, value, maxValue, index }) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
     >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-zinc-400 text-sm">{label}</span>
-        <span className="text-zinc-500 text-sm tabular-nums">{value.toLocaleString()}</span>
+      <div className="flex items-center justify-between mb-2 gap-2">
+        <span className="text-zinc-400 text-xs sm:text-sm truncate">{label}</span>
+        <span className="text-zinc-500 text-xs sm:text-sm tabular-nums shrink-0">{value.toLocaleString()}</span>
       </div>
       <div className="relative h-1.5 bg-zinc-900 rounded-full overflow-hidden">
         <motion.div
@@ -644,9 +648,9 @@ function TimelineEvent({ year, title, value, isLast }) {
         {!isLast && <div className="w-px flex-1 bg-zinc-900 my-1" />}
       </div>
       <div className="pb-6">
-        <span className="text-zinc-600 text-xs tabular-nums">{year}</span>
-        <p className="text-zinc-300 text-sm mt-0.5">{title}</p>
-        <p className="text-zinc-500 text-xs mt-0.5">{value}</p>
+        <span className="text-zinc-600 text-[10px] sm:text-xs tabular-nums">{year}</span>
+        <p className="text-zinc-300 text-xs sm:text-sm mt-0.5">{title}</p>
+        <p className="text-zinc-500 text-[10px] sm:text-xs mt-0.5">{value}</p>
       </div>
     </motion.div>
   );
@@ -760,7 +764,7 @@ export default function Impact() {
           
           {/* Main Chart - Row 2 */}
           <motion.div
-            className="lg:col-span-3 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-zinc-900/80 min-h-[400px]"
+            className="lg:col-span-3 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80 min-h-[350px] sm:min-h-[400px]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
@@ -771,13 +775,13 @@ export default function Impact() {
           
           {/* Timeline - Row 2 */}
           <motion.div
-            className="bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-zinc-900/80"
+            className="bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-zinc-400 text-xs uppercase tracking-[0.15em] mb-6">Milestones</h3>
+            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-4 sm:mb-6">Milestones</h3>
             <div className="space-y-0">
               {timelineEvents.map((event, i) => (
                 <TimelineEvent key={i} {...event} isLast={i === timelineEvents.length - 1} />
@@ -787,16 +791,16 @@ export default function Impact() {
           
           {/* Radar Chart - Row 3 */}
           <motion.div
-            className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-zinc-900/80"
+            className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1">
-                <h3 className="text-zinc-400 text-xs uppercase tracking-[0.15em] mb-2">Expertise Distribution</h3>
-                <p className="text-zinc-600 text-xs mb-6">Community skill coverage across domains</p>
+            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+              <div className="flex-1 w-full">
+                <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-2">Expertise Distribution</h3>
+                <p className="text-zinc-600 text-[10px] sm:text-xs mb-4 sm:mb-6">Community skill coverage across domains</p>
                 <RadarChart data={radarData} />
               </div>
             </div>
@@ -804,14 +808,14 @@ export default function Impact() {
           
           {/* Progress Rings - Row 3 */}
           <motion.div
-            className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-zinc-900/80"
+            className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-zinc-400 text-xs uppercase tracking-[0.15em] mb-8">Performance Indicators</h3>
-            <div className="flex justify-around">
+            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-6 sm:mb-8">Performance Indicators</h3>
+            <div className="flex flex-wrap justify-center sm:justify-around gap-6 sm:gap-4">
               <ProgressRing value={92} label="Satisfaction" sublabel="4.6/5 rating" />
               <ProgressRing value={87} label="Retention" sublabel="YoY return" />
               <ProgressRing value={95} label="Growth" sublabel="vs target" />
@@ -820,18 +824,18 @@ export default function Impact() {
           
           {/* Horizontal Metrics - Row 4 */}
           <motion.div
-            className="lg:col-span-4 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-zinc-900/80"
+            className="lg:col-span-4 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
+            <div className="flex flex-col md:flex-row md:items-start gap-6 sm:gap-8 md:gap-16">
               <div className="md:w-48 shrink-0">
-                <h3 className="text-zinc-400 text-xs uppercase tracking-[0.15em] mb-2">Event Breakdown</h3>
-                <p className="text-zinc-600 text-xs">Distribution across event types</p>
+                <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-2">Event Breakdown</h3>
+                <p className="text-zinc-600 text-[10px] sm:text-xs">Distribution across event types</p>
               </div>
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-5">
                 <HorizontalMetric label="Technical Workshops" value={2500} maxValue={3000} index={0} />
                 <HorizontalMetric label="Hackathons" value={1800} maxValue={2000} index={1} />
                 <HorizontalMetric label="Networking Events" value={1200} maxValue={1500} index={2} />

@@ -48,8 +48,9 @@ export default function About() {
 
   return (
     <>
+    <section id="about">
       {/* Mobile Version */}
-      <section className="md:hidden relative w-full bg-black text-white overflow-hidden">
+      <section className="md:hidden relative w-full bg-black text-white overflow-hidden" id="about">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
           style={{
@@ -172,6 +173,7 @@ export default function About() {
       <section
         ref={sectionRef}
         className="hidden md:block relative h-screen w-full overflow-hidden bg-black text-white"
+   
       >
         <div
           ref={trackRef}
@@ -208,7 +210,8 @@ export default function About() {
             <ImageBlock left="118vw" top="16vh" size="wideSmTall" />
           </div>
         </div>
-      </section>
+      </section>]
+    </section>
     </>
   );
 }
