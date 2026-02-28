@@ -16,13 +16,17 @@ export default function Hero() {
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 70,
     damping: 24,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   // 1. BRAND TEXT ANIMATIONS
   const brandOpacity = useTransform(smoothProgress, [0.3, 0.6], [0, 1]);
   const brandScale = useTransform(smoothProgress, [0.4, 0.9], [0.85, 1.05]);
-  const brandLetterSpacing = useTransform(smoothProgress, [0.4, 0.9], ["2.5em", "0.2em"]);
+  const brandLetterSpacing = useTransform(
+    smoothProgress,
+    [0.4, 0.9],
+    ["2.5em", "0.2em"],
+  );
   const brandBlur = useTransform(smoothProgress, [0.4, 0.7], [20, 0]);
 
   // 2. HUD & OVERLAY ANIMATIONS
@@ -36,13 +40,15 @@ export default function Hero() {
       // Alternating direction: odd blades go UP, even blades go DOWN
       direction: i % 2 === 0 ? -1 : 1,
       // Staggered delay based on index
-      delay: Math.abs(i - (BLADE_COUNT - 1) / 2) * 0.04
+      delay: Math.abs(i - (BLADE_COUNT - 1) / 2) * 0.04,
     }));
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[400vh] bg-black selection:bg-white selection:text-black">
-
+    <section
+      ref={sectionRef}
+      className="relative h-[400vh] bg-black selection:bg-white selection:text-black"
+    >
       {/* PROFESSIONAL GRAIN OVERLAY */}
       <div
         style={{ opacity: grainOpacity }}
@@ -61,9 +67,13 @@ export default function Hero() {
           <div className="flex flex-col gap-3 font-mono">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40 shadow-[0_0_10px_white]" />
-              <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase">Status_Link // Established</span>
+              <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase">
+                Status_Link // Established
+              </span>
             </div>
-            <div className="text-[8px] text-white/10 tracking-[0.2em] font-light">NEUTRON_CORE_v4.0.52 // B_&_W_PROTOCOL</div>
+            <div className="text-[8px] text-white/10 tracking-[0.2em] font-light">
+              NEUTRON_CORE_v4.0.52 // B_&_W_PROTOCOL
+            </div>
           </div>
           <div className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase text-right leading-relaxed">
             The Architectural <br /> Technical Festival
@@ -77,14 +87,15 @@ export default function Hero() {
             className="flex flex-col items-center gap-4"
           >
             <div className="w-px h-16 bg-gradient-to-t from-white/30 to-transparent" />
-            <div className="text-[8px] font-mono text-white/20 tracking-[0.6em] uppercase">Scroll to Deconstruct</div>
+            <div className="text-[8px] font-mono text-white/20 tracking-[0.6em] uppercase">
+              Scroll to Deconstruct
+            </div>
           </motion.div>
         </div>
       </motion.div>
 
       {/* 5. STICKY STAGE */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-
         {/* BRAND REVEAL (Behind the blades) */}
         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none px-6">
           <motion.div
@@ -92,7 +103,7 @@ export default function Hero() {
               opacity: brandOpacity,
               scale: brandScale,
               letterSpacing: brandLetterSpacing,
-              filter: `blur(${brandBlur}px)`
+              filter: `blur(${brandBlur}px)`,
             }}
             className="text-center"
           >
@@ -100,7 +111,9 @@ export default function Hero() {
               NEUTRON
             </h1>
             <motion.p
-              style={{ opacity: useTransform(smoothProgress, [0.7, 1], [0, 0.4]) }}
+              style={{
+                opacity: useTransform(smoothProgress, [0.7, 1], [0, 0.4]),
+              }}
               className="text-[10px] font-mono text-white/60 tracking-[1.5em] uppercase mt-12 pl-[1.5em]"
             >
               Architecting Innovation
@@ -111,22 +124,20 @@ export default function Hero() {
         {/* CINEMATIC APERTURE BLADES */}
         <div className="absolute inset-0 z-20 w-full h-full flex overflow-hidden">
           {blades.map((blade) => (
-            <Blade
-              key={blade.id}
-              blade={blade}
-              progress={smoothProgress}
-            />
+            <Blade key={blade.id} blade={blade} progress={smoothProgress} />
           ))}
         </div>
 
         {/* AMBIENT DEPTH LAYER */}
         <motion.div
-          style={{ opacity: useTransform(smoothProgress, [0.4, 0.8], [0, 0.6]) }}
+          style={{
+            opacity: useTransform(smoothProgress, [0.4, 0.8], [0, 0.6]),
+          }}
           className="absolute inset-0 bg-black z-10 pointer-events-none"
         />
       </div>
 
-      <style jsx global>{`
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
       `}</style>
     </section>
@@ -142,10 +153,14 @@ function Blade({ blade, progress }) {
   const yTranslate = useTransform(
     progress,
     [start + blade.delay, end],
-    ["0%", `${blade.direction * 110}%`]
+    ["0%", `${blade.direction * 110}%`],
   );
 
-  const opacity = useTransform(progress, [start + blade.delay + 0.3, end], [1, 0]);
+  const opacity = useTransform(
+    progress,
+    [start + blade.delay + 0.3, end],
+    [1, 0],
+  );
   const scale = useTransform(progress, [start + blade.delay, end], [1.02, 1.1]); // Slight overlap logic
 
   return (
@@ -166,7 +181,7 @@ function Blade({ blade, progress }) {
         className="absolute top-0 h-full object-cover max-w-none origin-top"
         style={{
           width: "100vw",
-          left: `-${(blade.id / BLADE_COUNT) * 100}vw`
+          left: `-${(blade.id / BLADE_COUNT) * 100}vw`,
         }}
       >
         <source

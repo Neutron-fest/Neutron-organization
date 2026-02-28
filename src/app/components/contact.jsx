@@ -19,7 +19,11 @@ export default function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [notification, setNotification] = useState({ show: false, message: "", type: "" });
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    type: "",
+  });
 
   const handleChange = (e) => {
     setFormData({
@@ -36,17 +40,16 @@ export default function Contact() {
     }, 5000);
   };
 
-
   // nodemailer integration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -54,7 +57,10 @@ export default function Contact() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        showNotification('Message sent successfully! We will get back to you soon.', 'success');
+        showNotification(
+          "Message sent successfully! We will get back to you soon.",
+          "success",
+        );
         setFormData({
           name: "",
           email: "",
@@ -62,11 +68,14 @@ export default function Contact() {
           message: "",
         });
       } else {
-        showNotification(result.message || 'Failed to send message. Please try again.', 'error');
+        showNotification(
+          result.message || "Failed to send message. Please try again.",
+          "error",
+        );
       }
     } catch (error) {
-      console.error('Error:', error);
-      showNotification('An error occurred. Please try again later.', 'error');
+      console.error("Error:", error);
+      showNotification("An error occurred. Please try again later.", "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -84,9 +93,9 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           className={`fixed top-8 right-8 z-50 px-6 py-4 rounded-xl shadow-lg ${
-            notification.type === 'success' 
-              ? 'bg-green-500 text-white' 
-              : 'bg-red-500 text-white'
+            notification.type === "success"
+              ? "bg-green-500 text-white"
+              : "bg-red-500 text-white"
           }`}
         >
           <p className="font-medium">{notification.message}</p>
@@ -96,7 +105,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="mb-16">
-          <motion.p 
+          <motion.p
             className="text-zinc-500 text-sm uppercase tracking-wider mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,10 +117,9 @@ export default function Contact() {
           <AnimatedHeading
             className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black"
             highlightWords={["talking", "do"]}
-            highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+            highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
           >
-            Interested in talking,
-let's do it.
+            Interested in talking, let's do it.
           </AnimatedHeading>
         </div>
 
@@ -180,7 +188,7 @@ let's do it.
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? "Sending..." : "Send Message"}
                 {!isSubmitting && <ArrowRight className="w-5 h-5" />}
               </motion.button>
             </form>
@@ -203,19 +211,8 @@ let's do it.
                 href="mailto:neutron@gmail.com"
                 className="text-2xl md:text-3xl font-semibold text-white hover:opacity-80 transition-opacity"
               >
-                neutron@gmail.com
+                neutronfest@nst.rishihood.edu.in
               </a>
-            </div>
-
-            {/* Location */}
-            <div className="bg-black rounded-2xl p-8 border border-zinc-800">
-              <p className="text-zinc-500 text-sm uppercase tracking-wider mb-3">
-                LOCATION
-              </p>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-gray-400" />
-                <p className="text-xl text-white font-medium">India</p>
-              </div>
             </div>
 
             {/* Connect */}

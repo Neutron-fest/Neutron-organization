@@ -3,16 +3,56 @@ import { motion } from "motion/react";
 import { AnimatedHeading } from "@/components/ui/animated-heading";
 
 const galleryItems = [
-  { id: 1,  placement: { gridColumn: "1 / 3", gridRow: "1 / 3" }, image: "https://picsum.photos/seed/neutron1/400/400" },
-  { id: 2,  placement: { gridColumn: "3 / 4", gridRow: "1 / 2" }, image: "https://picsum.photos/seed/neutron2/200/200" },
-  { id: 3,  placement: { gridColumn: "4 / 5", gridRow: "1 / 2" }, image: "https://picsum.photos/seed/neutron3/200/200" },
-  { id: 4,  placement: { gridColumn: "5 / 7", gridRow: "1 / 3" }, image: "https://picsum.photos/seed/neutron4/400/400" },
-  { id: 5,  placement: { gridColumn: "3 / 5", gridRow: "2 / 3" }, image: "https://picsum.photos/seed/neutron5/400/200" },
-  { id: 6,  placement: { gridColumn: "1 / 3", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron6/400/200" },
-  { id: 7,  placement: { gridColumn: "3 / 4", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron7/200/200" },
-  { id: 8,  placement: { gridColumn: "4 / 5", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron8/200/200" },
-  { id: 9,  placement: { gridColumn: "5 / 6", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron9/200/200" },
-  { id: 10, placement: { gridColumn: "6 / 7", gridRow: "3 / 4" }, image: "https://picsum.photos/seed/neutron10/200/200" },
+  {
+    id: 1,
+    placement: { gridColumn: "1 / 3", gridRow: "1 / 3" },
+    image: "https://picsum.photos/seed/neutron1/400/400",
+  },
+  {
+    id: 2,
+    placement: { gridColumn: "3 / 4", gridRow: "1 / 2" },
+    image: "https://picsum.photos/seed/neutron2/200/200",
+  },
+  {
+    id: 3,
+    placement: { gridColumn: "4 / 5", gridRow: "1 / 2" },
+    image: "https://picsum.photos/seed/neutron3/200/200",
+  },
+  {
+    id: 4,
+    placement: { gridColumn: "5 / 7", gridRow: "1 / 3" },
+    image: "https://picsum.photos/seed/neutron4/400/400",
+  },
+  {
+    id: 5,
+    placement: { gridColumn: "3 / 5", gridRow: "2 / 3" },
+    image: "https://picsum.photos/seed/neutron5/400/200",
+  },
+  {
+    id: 6,
+    placement: { gridColumn: "1 / 3", gridRow: "3 / 4" },
+    image: "https://picsum.photos/seed/neutron6/400/200",
+  },
+  {
+    id: 7,
+    placement: { gridColumn: "3 / 4", gridRow: "3 / 4" },
+    image: "https://picsum.photos/seed/neutron7/200/200",
+  },
+  {
+    id: 8,
+    placement: { gridColumn: "4 / 5", gridRow: "3 / 4" },
+    image: "https://picsum.photos/seed/neutron8/200/200",
+  },
+  {
+    id: 9,
+    placement: { gridColumn: "5 / 6", gridRow: "3 / 4" },
+    image: "https://picsum.photos/seed/neutron9/200/200",
+  },
+  {
+    id: 10,
+    placement: { gridColumn: "6 / 7", gridRow: "3 / 4" },
+    image: "https://picsum.photos/seed/neutron10/200/200",
+  },
 ];
 
 function GalleryGrid({ idPrefix = "", animate = false }) {
@@ -49,7 +89,7 @@ function GalleryGrid({ idPrefix = "", animate = false }) {
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
             />
           </div>
-        )
+        ),
       )}
     </div>
   );
@@ -57,11 +97,14 @@ function GalleryGrid({ idPrefix = "", animate = false }) {
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="w-screen min-h-screen bg-black py-20 overflow-hidden">
+    <section
+      id="gallery"
+      className="w-screen min-h-screen bg-black py-20 overflow-hidden"
+    >
       <AnimatedHeading
         className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16 px-4"
         highlightWords={["Achieved"]}
-        highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+        highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
       >
         What We Have Achieved
       </AnimatedHeading>

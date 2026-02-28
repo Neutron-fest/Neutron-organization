@@ -52,7 +52,10 @@ function renderLineWithHighlights(text, highlights) {
 
     matches.forEach((match) => {
       if (match.index > lastIndex) {
-        parts.push({ text: text.slice(lastIndex, match.index), highlight: false });
+        parts.push({
+          text: text.slice(lastIndex, match.index),
+          highlight: false,
+        });
       }
       parts.push({ text: match[0], highlight: true });
       lastIndex = match.index + match[0].length;
@@ -74,7 +77,7 @@ function renderLineWithHighlights(text, highlights) {
       </strong>
     ) : (
       <span key={index}>{part.text}</span>
-    )
+    ),
   );
 }
 
@@ -82,7 +85,7 @@ export function AnimatedHeading({
   children,
   className = "",
   highlightWords = [],
-  highlightColor = "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)",
+  highlightColor = "linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)",
   as: Component = "h2",
   staggerDelay = 0.15,
   animationDuration = 1.2,
@@ -99,7 +102,7 @@ export function AnimatedHeading({
       return text.split("\n").map((line) => ({
         text: line.trim(),
         highlights: highlightWords.filter((word) =>
-          new RegExp(`\\b${word}\\b`, "gi").test(line)
+          new RegExp(`\\b${word}\\b`, "gi").test(line),
         ),
       }));
     }
@@ -170,7 +173,7 @@ export function AnimatedHeading({
 export function AnimatedText({
   children,
   className = "",
-  highlightColor = "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)",
+  highlightColor = "linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)",
   as: Component = "h2",
   delay = 0,
 }) {
@@ -231,7 +234,8 @@ export function AnimatedWords({
     <Component ref={ref} className={className}>
       {words.map((word, index) => {
         const isHighlight = highlightWords.some(
-          (hw) => hw.toLowerCase() === word.toLowerCase().replace(/[.,!?]/g, "")
+          (hw) =>
+            hw.toLowerCase() === word.toLowerCase().replace(/[.,!?]/g, ""),
         );
         return (
           <motion.span

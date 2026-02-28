@@ -62,20 +62,20 @@ export default function Team() {
           <AnimatedHeading
             className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4"
             highlightWords={["Students", "possible"]}
-            highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+            highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
           >
             Students who made it possible
           </AnimatedHeading>
-          <motion.p
-            className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            All the tech events were imagined, organised, and led entirely by
-            NST students
-          </motion.p>
+          <div className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl">
+            <AnimatedHeading
+              highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
+              as="div"
+              className="font-normal"
+            >
+              All the tech events were imagined, organised, and led entirely by
+              NST students
+            </AnimatedHeading>
+          </div>
         </div>
       </div>
 
@@ -85,8 +85,8 @@ export default function Team() {
         <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
         {/* Right gradient overlay */}
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
-        
-        <div 
+
+        <div
           className="flex gap-6 pl-16 md:pl-24 lg:pl-32 hover:[animation-play-state:paused]"
           style={{
             width: "fit-content",
@@ -118,14 +118,16 @@ export default function Team() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </section>
   );
 }

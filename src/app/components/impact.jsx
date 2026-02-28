@@ -1,5 +1,13 @@
 "use client";
-import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll, useAnimationFrame } from "motion/react";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useScroll,
+  useAnimationFrame,
+} from "motion/react";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { AnimatedText } from "@/components/ui/animated-heading";
 
@@ -47,7 +55,8 @@ function RollingNumber({ value, suffix = "" }) {
 
   return (
     <span ref={ref} className="tabular-nums font-mono">
-      {displayed.toLocaleString()}{suffix}
+      {displayed.toLocaleString()}
+      {suffix}
     </span>
   );
 }
@@ -60,7 +69,9 @@ function LiveIndicator() {
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-500 opacity-75" />
         <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-400" />
       </span>
-      <span className="text-zinc-500 text-[10px] uppercase tracking-widest">Live</span>
+      <span className="text-zinc-500 text-[10px] uppercase tracking-widest">
+        Live
+      </span>
     </span>
   );
 }
@@ -76,7 +87,9 @@ function Sparkline({ data, width = 80, height = 24, color = "#52525b" }) {
     y: height - ((v - min) / range) * height * 0.8 - height * 0.1,
   }));
 
-  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+  const pathD = points
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+    .join(" ");
 
   return (
     <svg width={width} height={height} className="overflow-visible">
@@ -107,7 +120,15 @@ function Sparkline({ data, width = 80, height = 24, color = "#52525b" }) {
 }
 
 // Hero stat with large number
-function HeroStat({ value, suffix, label, trend, trendValue, sparkData, accent = '#a1a1aa' }) {
+function HeroStat({
+  value,
+  suffix,
+  label,
+  trend,
+  trendValue,
+  sparkData,
+  accent = "#a1a1aa",
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -123,16 +144,21 @@ function HeroStat({ value, suffix, label, trend, trendValue, sparkData, accent =
       <div
         className="relative rounded-2xl p-6 overflow-hidden transition-all duration-500"
         style={{
-          background: '#0d0d0d',
-          border: `1px solid ${isHovered ? accent + '40' : 'rgba(39,39,42,0.8)'}`,
-          boxShadow: isHovered ? `0 0 40px 0 ${accent}18` : 'none',
+          background: "#0d0d0d",
+          border: `1px solid ${isHovered ? accent + "40" : "rgba(39,39,42,0.8)"}`,
+          boxShadow: isHovered ? `0 0 40px 0 ${accent}18` : "none",
         }}
       >
         <motion.div
           className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-          style={{ background: `linear-gradient(90deg, transparent, ${accent}80, transparent)` }}
+          style={{
+            background: `linear-gradient(90deg, transparent, ${accent}80, transparent)`,
+          }}
           initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: isHovered ? 1 : 0.3, opacity: isHovered ? 1 : 0.4 }}
+          animate={{
+            scaleX: isHovered ? 1 : 0.3,
+            opacity: isHovered ? 1 : 0.4,
+          }}
           transition={{ duration: 0.5 }}
         />
 
@@ -148,44 +174,28 @@ function HeroStat({ value, suffix, label, trend, trendValue, sparkData, accent =
           <div>
             <span
               className="text-[10px] uppercase tracking-[0.18em] font-medium"
-              style={{ color: accent + 'aa' }}
+              style={{ color: accent + "aa" }}
             >
               {label}
             </span>
           </div>
-          {sparkData && (
-            <Sparkline data={sparkData} color={accent} />
-          )}
+          {sparkData && <Sparkline data={sparkData} color={accent} />}
         </div>
 
         <div className="mb-2">
           <h3
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
-            style={{ color: '#f4f4f5' }}
+            style={{ color: "#f4f4f5" }}
           >
             <RollingNumber value={value} suffix={suffix} />
           </h3>
         </div>
 
-        {trend && (
-          <span
-            className="inline-flex items-center gap-1 mt-3 px-2.5 py-1 rounded-full text-[10px] font-semibold tabular-nums"
-            style={{
-              background: accent + '18',
-              color: accent,
-              border: `1px solid ${accent}30`,
-            }}
-          >
-            <svg className="w-2.5 h-2.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-            {trendValue}
-          </span>
-        )}
-
         <div
           className="mt-5 h-px"
-          style={{ background: `linear-gradient(90deg, ${accent}30, transparent)` }}
+          style={{
+            background: `linear-gradient(90deg, ${accent}30, transparent)`,
+          }}
         />
       </div>
     </motion.div>
@@ -205,7 +215,9 @@ function AdvancedChart({ data }) {
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
 
-  const maxValue = Math.max(...data.flatMap(d => [d.participants, d.engagement]));
+  const maxValue = Math.max(
+    ...data.flatMap((d) => [d.participants, d.engagement]),
+  );
 
   const points = useMemo(() => {
     return data.map((d, i) => ({
@@ -216,41 +228,48 @@ function AdvancedChart({ data }) {
     }));
   }, [data, maxValue, innerWidth, innerHeight]);
 
-  const createPath = useCallback((series) => {
-    const yKey = series === 'participants' ? 'y1' : 'y2';
-    if (points.length < 2) return '';
+  const createPath = useCallback(
+    (series) => {
+      const yKey = series === "participants" ? "y1" : "y2";
+      if (points.length < 2) return "";
 
-    let path = `M ${points[0].x} ${points[0][yKey]}`;
+      let path = `M ${points[0].x} ${points[0][yKey]}`;
 
-    for (let i = 1; i < points.length; i++) {
-      const prev = points[i - 1];
-      const curr = points[i];
-      const tension = 0.4;
+      for (let i = 1; i < points.length; i++) {
+        const prev = points[i - 1];
+        const curr = points[i];
+        const tension = 0.4;
 
-      const cp1x = prev.x + (curr.x - prev.x) * tension;
-      const cp2x = curr.x - (curr.x - prev.x) * tension;
+        const cp1x = prev.x + (curr.x - prev.x) * tension;
+        const cp2x = curr.x - (curr.x - prev.x) * tension;
 
-      path += ` C ${cp1x} ${prev[yKey]}, ${cp2x} ${curr[yKey]}, ${curr.x} ${curr[yKey]}`;
-    }
+        path += ` C ${cp1x} ${prev[yKey]}, ${cp2x} ${curr[yKey]}, ${curr.x} ${curr[yKey]}`;
+      }
 
-    return path;
-  }, [points]);
+      return path;
+    },
+    [points],
+  );
 
-  const participantsPath = createPath('participants');
-  const engagementPath = createPath('engagement');
+  const participantsPath = createPath("participants");
+  const engagementPath = createPath("engagement");
 
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h3 className="text-zinc-200 text-base sm:text-lg font-medium mb-1">Growth Overview</h3>
-          <p className="text-zinc-600 text-xs">Participation vs Engagement metrics</p>
+          <h3 className="text-zinc-200 text-base sm:text-lg font-medium mb-1">
+            Growth Overview
+          </h3>
+          <p className="text-zinc-600 text-xs">
+            Participation vs Engagement metrics
+          </p>
         </div>
         <div className="flex items-center gap-3 sm:gap-4">
           <button
-            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === 'participants' || !hoveredSeries ? 'text-zinc-400' : 'text-zinc-700'}`}
-            onMouseEnter={() => setHoveredSeries('participants')}
+            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === "participants" || !hoveredSeries ? "text-zinc-400" : "text-zinc-700"}`}
+            onMouseEnter={() => setHoveredSeries("participants")}
             onMouseLeave={() => setHoveredSeries(null)}
           >
             <span className="w-2.5 sm:w-3 h-[2px] bg-zinc-400" />
@@ -258,8 +277,8 @@ function AdvancedChart({ data }) {
             <span className="inline xs:hidden sm:hidden">Part.</span>
           </button>
           <button
-            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === 'engagement' || !hoveredSeries ? 'text-zinc-600' : 'text-zinc-800'}`}
-            onMouseEnter={() => setHoveredSeries('engagement')}
+            className={`flex items-center gap-1.5 text-[10px] sm:text-xs transition-colors ${hoveredSeries === "engagement" || !hoveredSeries ? "text-zinc-600" : "text-zinc-800"}`}
+            onMouseEnter={() => setHoveredSeries("engagement")}
             onMouseLeave={() => setHoveredSeries(null)}
           >
             <span className="w-2.5 sm:w-3 h-[2px] bg-zinc-600 opacity-60" />
@@ -270,10 +289,23 @@ function AdvancedChart({ data }) {
       </div>
 
       {/* Chart */}
-      <div className="flex-1 relative min-h-[250px] sm:min-h-[280px]" ref={chartRef}>
-        <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="xMinYMid meet">
+      <div
+        className="flex-1 relative min-h-[250px] sm:min-h-[280px]"
+        ref={chartRef}
+      >
+        <svg
+          className="w-full h-full"
+          viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+          preserveAspectRatio="xMinYMid meet"
+        >
           <defs>
-            <linearGradient id="participantsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient
+              id="participantsGradient"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="rgba(161, 161, 170, 0.15)" />
               <stop offset="100%" stopColor="rgba(161, 161, 170, 0)" />
             </linearGradient>
@@ -308,10 +340,13 @@ function AdvancedChart({ data }) {
 
           {/* Area fill */}
           <motion.path
-            d={participantsPath + ` L ${points[points.length - 1]?.x} ${padding.top + innerHeight} L ${points[0]?.x} ${padding.top + innerHeight} Z`}
+            d={
+              participantsPath +
+              ` L ${points[points.length - 1]?.x} ${padding.top + innerHeight} L ${points[0]?.x} ${padding.top + innerHeight} Z`
+            }
             fill="url(#participantsGradient)"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: hoveredSeries === 'engagement' ? 0.3 : 1 }}
+            whileInView={{ opacity: hoveredSeries === "engagement" ? 0.3 : 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           />
@@ -321,21 +356,21 @@ function AdvancedChart({ data }) {
             d={participantsPath}
             fill="none"
             stroke="#a1a1aa"
-            strokeWidth={hoveredSeries === 'participants' ? 2.5 : 2}
+            strokeWidth={hoveredSeries === "participants" ? 2.5 : 2}
             strokeLinecap="round"
             strokeLinejoin="round"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true }}
-            style={{ opacity: hoveredSeries === 'engagement' ? 0.3 : 1 }}
+            style={{ opacity: hoveredSeries === "engagement" ? 0.3 : 1 }}
           />
 
           <motion.path
             d={engagementPath}
             fill="none"
             stroke="#52525b"
-            strokeWidth={hoveredSeries === 'engagement' ? 2.5 : 1.5}
+            strokeWidth={hoveredSeries === "engagement" ? 2.5 : 1.5}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeDasharray="6 4"
@@ -343,7 +378,7 @@ function AdvancedChart({ data }) {
             whileInView={{ pathLength: 1 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
             viewport={{ once: true }}
-            style={{ opacity: hoveredSeries === 'participants' ? 0.3 : 1 }}
+            style={{ opacity: hoveredSeries === "participants" ? 0.3 : 1 }}
           />
 
           {/* Interactive points */}
@@ -358,7 +393,7 @@ function AdvancedChart({ data }) {
                 fill="transparent"
                 onMouseEnter={() => setActiveIndex(i)}
                 onMouseLeave={() => setActiveIndex(null)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               />
 
               {/* Vertical line on hover */}
@@ -390,37 +425,55 @@ function AdvancedChart({ data }) {
               />
 
               {/* Tooltip */}
-              {activeIndex === i && (() => {
-                const tooltipWidth = 110;
-                const tooltipHeight = 45;
-                const isRightSide = point.x > padding.left + innerWidth / 2;
-                const tooltipX = isRightSide
-                  ? point.x - tooltipWidth - 8
-                  : point.x + 8;
-                const rawY = Math.min(point.y1, point.y2) - tooltipHeight - 10;
-                const tooltipY = Math.max(padding.top, rawY);
-                const textX = tooltipX + tooltipWidth / 2;
-                return (
-                  <motion.g initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}>
-                    <rect
-                      x={tooltipX}
-                      y={tooltipY}
-                      width={tooltipWidth}
-                      height={tooltipHeight}
-                      rx="6"
-                      fill="#18181b"
-                      stroke="#27272a"
-                      strokeWidth="1"
-                    />
-                    <text x={textX} y={tooltipY + 17} textAnchor="middle" fill="#a1a1aa" fontSize="10" fontWeight="500">
-                      {point.participants.toLocaleString()} participants
-                    </text>
-                    <text x={textX} y={tooltipY + 33} textAnchor="middle" fill="#71717a" fontSize="10">
-                      {point.engagement.toLocaleString()} engaged
-                    </text>
-                  </motion.g>
-                );
-              })()}
+              {activeIndex === i &&
+                (() => {
+                  const tooltipWidth = 110;
+                  const tooltipHeight = 45;
+                  const isRightSide = point.x > padding.left + innerWidth / 2;
+                  const tooltipX = isRightSide
+                    ? point.x - tooltipWidth - 8
+                    : point.x + 8;
+                  const rawY =
+                    Math.min(point.y1, point.y2) - tooltipHeight - 10;
+                  const tooltipY = Math.max(padding.top, rawY);
+                  const textX = tooltipX + tooltipWidth / 2;
+                  return (
+                    <motion.g
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <rect
+                        x={tooltipX}
+                        y={tooltipY}
+                        width={tooltipWidth}
+                        height={tooltipHeight}
+                        rx="6"
+                        fill="#18181b"
+                        stroke="#27272a"
+                        strokeWidth="1"
+                      />
+                      <text
+                        x={textX}
+                        y={tooltipY + 17}
+                        textAnchor="middle"
+                        fill="#a1a1aa"
+                        fontSize="10"
+                        fontWeight="500"
+                      >
+                        {point.participants.toLocaleString()} participants
+                      </text>
+                      <text
+                        x={textX}
+                        y={tooltipY + 33}
+                        textAnchor="middle"
+                        fill="#71717a"
+                        fontSize="10"
+                      >
+                        {point.engagement.toLocaleString()} engaged
+                      </text>
+                    </motion.g>
+                  );
+                })()}
 
               <text
                 x={point.x}
@@ -461,7 +514,9 @@ function RadarChart({ data }) {
     });
   }, [data, angleStep]);
 
-  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
+  const pathD =
+    points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") +
+    " Z";
 
   return (
     <div className="flex flex-col items-center">
@@ -470,11 +525,13 @@ function RadarChart({ data }) {
         {[0.25, 0.5, 0.75, 1].map((scale, i) => (
           <polygon
             key={i}
-            points={data.map((_, j) => {
-              const angle = j * angleStep - Math.PI / 2;
-              const r = scale * radius;
-              return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
-            }).join(' ')}
+            points={data
+              .map((_, j) => {
+                const angle = j * angleStep - Math.PI / 2;
+                const r = scale * radius;
+                return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
+              })
+              .join(" ")}
             fill="none"
             stroke="rgba(63, 63, 70, 0.3)"
             strokeWidth="1"
@@ -499,7 +556,7 @@ function RadarChart({ data }) {
 
         {/* Data shape */}
         <motion.polygon
-          points={points.map(p => `${p.x},${p.y}`).join(' ')}
+          points={points.map((p) => `${p.x},${p.y}`).join(" ")}
           fill="rgba(82, 82, 91, 0.2)"
           stroke="#71717a"
           strokeWidth="2"
@@ -507,7 +564,7 @@ function RadarChart({ data }) {
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          style={{ transformOrigin: 'center' }}
+          style={{ transformOrigin: "center" }}
         />
 
         {/* Points */}
@@ -549,7 +606,7 @@ function RadarChart({ data }) {
 
 // Animated progress ring
 function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
   const actualSize = isMobile ? mobileSize : size;
   const strokeWidth = isMobile ? 6 : 8;
   const radius = (actualSize - strokeWidth) / 2;
@@ -564,7 +621,11 @@ function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
       viewport={{ once: true }}
     >
       <div className="relative">
-        <svg width={actualSize} height={actualSize} className="transform -rotate-90">
+        <svg
+          width={actualSize}
+          height={actualSize}
+          className="transform -rotate-90"
+        >
           <circle
             cx={actualSize / 2}
             cy={actualSize / 2}
@@ -583,18 +644,26 @@ function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
-            whileInView={{ strokeDashoffset: circumference - (value / 100) * circumference }}
+            whileInView={{
+              strokeDashoffset: circumference - (value / 100) * circumference,
+            }}
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-zinc-200 text-xl sm:text-2xl font-light tabular-nums">{value}%</span>
+          <span className="text-zinc-200 text-xl sm:text-2xl font-light tabular-nums">
+            {value}%
+          </span>
         </div>
       </div>
       <div className="mt-3 sm:mt-4 text-center">
         <p className="text-zinc-400 text-xs sm:text-sm">{label}</p>
-        {sublabel && <p className="text-zinc-600 text-[10px] sm:text-xs mt-0.5">{sublabel}</p>}
+        {sublabel && (
+          <p className="text-zinc-600 text-[10px] sm:text-xs mt-0.5">
+            {sublabel}
+          </p>
+        )}
       </div>
     </motion.div>
   );
@@ -613,15 +682,23 @@ function HorizontalMetric({ label, value, maxValue, index }) {
       viewport={{ once: true }}
     >
       <div className="flex items-center justify-between mb-2 gap-2">
-        <span className="text-zinc-400 text-xs sm:text-sm truncate">{label}</span>
-        <span className="text-zinc-500 text-xs sm:text-sm tabular-nums shrink-0">{value.toLocaleString()}</span>
+        <span className="text-zinc-400 text-xs sm:text-sm truncate">
+          {label}
+        </span>
+        <span className="text-zinc-500 text-xs sm:text-sm tabular-nums shrink-0">
+          {value.toLocaleString()}
+        </span>
       </div>
       <div className="relative h-1.5 bg-zinc-900 rounded-full overflow-hidden">
         <motion.div
           className="absolute inset-y-0 left-0 bg-zinc-700 rounded-full"
           initial={{ width: 0 }}
           whileInView={{ width: `${percentage}%` }}
-          transition={{ duration: 1, delay: 0.2 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{
+            duration: 1,
+            delay: 0.2 + index * 0.1,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           viewport={{ once: true }}
         />
         <motion.div
@@ -648,7 +725,9 @@ function TimelineEvent({ year, title, value, isLast }) {
         {!isLast && <div className="w-px flex-1 bg-zinc-900 my-1" />}
       </div>
       <div className="pb-6">
-        <span className="text-zinc-600 text-[10px] sm:text-xs tabular-nums">{year}</span>
+        <span className="text-zinc-600 text-[10px] sm:text-xs tabular-nums">
+          {year}
+        </span>
         <p className="text-zinc-300 text-xs sm:text-sm mt-0.5">{title}</p>
         <p className="text-zinc-500 text-[10px] sm:text-xs mt-0.5">{value}</p>
       </div>
@@ -658,12 +737,8 @@ function TimelineEvent({ year, title, value, isLast }) {
 
 export default function Impact() {
   const chartData = [
-    { year: "2020", participants: 500, engagement: 800 },
-    { year: "2021", participants: 1200, engagement: 1500 },
-    { year: "2022", participants: 2100, engagement: 2200 },
-    { year: "2023", participants: 3500, engagement: 3100 },
-    { year: "2024", participants: 5200, engagement: 4500 },
-    { year: "2025", participants: 7000, engagement: 6200 },
+    { year: "2024", participants: 2800, engagement: 2400 },
+    { year: "2025", participants: 3500, engagement: 3000 },
   ];
 
   const radarData = [
@@ -675,10 +750,24 @@ export default function Impact() {
   ];
 
   const timelineEvents = [
-    { year: "2025", title: "Global Summit Launch", value: "12 countries" },
-    { year: "2024", title: "5000 members milestone", value: "+45% growth" },
-    { year: "2023", title: "Industry partnerships", value: "50+ sponsors" },
-    { year: "2022", title: "Platform v2.0", value: "Complete redesign" },
+    {
+      year: "2024",
+      title: "The Spark",
+      value:
+        "The first Neutron lit up the campus with raw energy, packed crowds, and nonstop music till midnight.",
+    },
+    {
+      year: "2025",
+      title: "The Explosion",
+      value:
+        "Bigger stages, louder sets, national artists, and double the crowd — Neutron became the fest everyone talked about.",
+    },
+    {
+      year: "2026",
+      title: "The Phenomenon",
+      value:
+        "Massive production, immersive installations, and record-breaking footfall.",
+    },
   ];
 
   return (
@@ -705,7 +794,9 @@ export default function Impact() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <span className="text-zinc-600 text-xs uppercase tracking-[0.2em]">Analytics</span>
+              <span className="text-zinc-600 text-xs uppercase tracking-[0.2em]">
+                Analytics
+              </span>
               <LiveIndicator />
             </motion.div>
 
@@ -718,7 +809,8 @@ export default function Impact() {
           </div>
 
           <p className="text-zinc-500 text-sm max-w-full md:max-w-sm md:text-right leading-relaxed">
-            Real-time metrics tracking our community growth and engagement across all platforms.
+            Real-time metrics tracking our community growth and engagement
+            across all platforms.
           </p>
         </motion.div>
 
@@ -726,7 +818,7 @@ export default function Impact() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {/* Hero Stats - Row 1 */}
           <HeroStat
-            value={5000}
+            value={3500}
             suffix="+"
             label="Total Participants"
             trend="up"
@@ -744,7 +836,7 @@ export default function Impact() {
             accent="#a1a1aa"
           />
           <HeroStat
-            value={100}
+            value={60}
             suffix="+"
             label="Partners & Sponsors"
             sparkData={[20, 35, 52, 70, 85, 100]}
@@ -753,9 +845,9 @@ export default function Impact() {
             accent="#71717a"
           />
           <HeroStat
-            value={25}
-            suffix=""
-            label="Countries Reached"
+            value={1000000}
+            suffix="+"
+            label="People Reached"
             trend="up"
             trendValue="+5"
             sparkData={[3, 7, 12, 16, 20, 25]}
@@ -781,10 +873,16 @@ export default function Impact() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-4 sm:mb-6">Milestones</h3>
+            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-4 sm:mb-6">
+              Milestones
+            </h3>
             <div className="space-y-0">
               {timelineEvents.map((event, i) => (
-                <TimelineEvent key={i} {...event} isLast={i === timelineEvents.length - 1} />
+                <TimelineEvent
+                  key={i}
+                  {...event}
+                  isLast={i === timelineEvents.length - 1}
+                />
               ))}
             </div>
           </motion.div>
@@ -799,8 +897,12 @@ export default function Impact() {
           >
             <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
               <div className="flex-1 w-full">
-                <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-2">Expertise Distribution</h3>
-                <p className="text-zinc-600 text-[10px] sm:text-xs mb-4 sm:mb-6">Community skill coverage across domains</p>
+                <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-2">
+                  Expertise Distribution
+                </h3>
+                <p className="text-zinc-600 text-[10px] sm:text-xs mb-4 sm:mb-6">
+                  Community skill coverage across domains
+                </p>
                 <RadarChart data={radarData} />
               </div>
             </div>
@@ -814,33 +916,21 @@ export default function Impact() {
             transition={{ duration: 0.7, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-6 sm:mb-8">Performance Indicators</h3>
+            <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-6 sm:mb-8">
+              Performance Indicators
+            </h3>
             <div className="flex flex-wrap justify-center sm:justify-around gap-6 sm:gap-4">
-              <ProgressRing value={92} label="Satisfaction" sublabel="4.6/5 rating" />
-              <ProgressRing value={87} label="Retention" sublabel="YoY return" />
+              <ProgressRing
+                value={92}
+                label="Satisfaction"
+                sublabel="4.6/5 rating"
+              />
+              <ProgressRing
+                value={87}
+                label="Retention"
+                sublabel="YoY return"
+              />
               <ProgressRing value={95} label="Growth" sublabel="vs target" />
-            </div>
-          </motion.div>
-
-          {/* Horizontal Metrics - Row 4 */}
-          <motion.div
-            className="lg:col-span-4 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex flex-col md:flex-row md:items-start gap-6 sm:gap-8 md:gap-16">
-              <div className="md:w-48 shrink-0">
-                <h3 className="text-zinc-400 text-[10px] sm:text-xs uppercase tracking-[0.15em] mb-2">Event Breakdown</h3>
-                <p className="text-zinc-600 text-[10px] sm:text-xs">Distribution across event types</p>
-              </div>
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-5">
-                <HorizontalMetric label="Technical Workshops" value={2500} maxValue={3000} index={0} />
-                <HorizontalMetric label="Hackathons" value={1800} maxValue={2000} index={1} />
-                <HorizontalMetric label="Networking Events" value={1200} maxValue={1500} index={2} />
-                <HorizontalMetric label="Mentorship Sessions" value={800} maxValue={1000} index={3} />
-              </div>
             </div>
           </motion.div>
         </div>
