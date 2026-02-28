@@ -208,7 +208,8 @@ export default function Contact() {
                 EMAIL
               </p>
               <a
-                href="mailto:neutron@gmail.com"
+                href="mailto:
+neutronfest@nst.rishihood.edu.in"
                 className="text-2xl md:text-3xl font-semibold text-white hover:opacity-80 transition-opacity"
               >
                 neutronfest@nst.rishihood.edu.in

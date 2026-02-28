@@ -46,7 +46,6 @@ export default function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
-
   const socialLinks = [
     {
       name: "Instagram",
@@ -160,7 +159,9 @@ export default function Footer() {
               <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 <span className="text-black font-black">N</span>
               </div>
-              <span className="text-white font-['Greater_Theory'] text-2xl tracking-tighter uppercase">Neutron</span>
+              <span className="text-white font-['Greater_Theory'] text-2xl tracking-tighter uppercase">
+                Neutron
+              </span>
             </a>
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering innovation through technology. Leading tech events and
@@ -191,11 +192,12 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:neutron@gmail.com"
+                  href="mailto:
+neutronfest@nst.rishihood.edu.in"
                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm group"
                 >
                   <Mail className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:scale-110 transition-all" />
-                  neutron@gmail.com
+                  neutronfest@nst.rishihood.edu.in
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">
