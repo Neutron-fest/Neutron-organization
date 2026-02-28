@@ -46,6 +46,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div>
+
             <h3 className="text-white text-3xl font-bold mb-4">Neutron</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering innovation through technology. Leading tech events and

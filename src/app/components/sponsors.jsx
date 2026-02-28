@@ -188,7 +188,7 @@ export default function Sponsors() {
       <div className="relative z-10 w-full flex flex-col items-center">
         <AnimatedText
           className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-center mb-16"
-          highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+          highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
         >
           OUR SPONSORS
         </AnimatedText>

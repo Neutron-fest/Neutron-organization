@@ -83,7 +83,7 @@ export default function Footer() {
     >
       {/* Background gradient glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent blur-3xl"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-gradient-to-br from-white/10 via-zinc-500/5 to-transparent blur-3xl"></div>
       </div>
 
       {/* Large background text with hover effect */}
@@ -96,9 +96,9 @@ export default function Footer() {
         >
           <defs>
             <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#80eeb4" />
-              <stop offset="50%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#8b5cf6" />
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="50%" stopColor="#71717a" />
+              <stop offset="100%" stopColor="#ffffff" />
             </linearGradient>
 
             <radialGradient
@@ -157,10 +157,10 @@ export default function Footer() {
           {/* Brand section */}
           <div className="md:col-span-1">
             <a href="#home" className="inline-flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600">
-                <span className="text-white font-bold">N</span>
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <span className="text-black font-black">N</span>
               </div>
-              <span className="text-white font-semibold text-lg">Neutron</span>
+              <span className="text-white font-['Greater_Theory'] text-2xl tracking-tighter uppercase">Neutron</span>
             </a>
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering innovation through technology. Leading tech events and
@@ -194,12 +194,12 @@ export default function Footer() {
                   href="mailto:neutron@gmail.com"
                   className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm group"
                 >
-                  <Mail className="w-4 h-4 text-blue-500 group-hover:scale-110 transition-transform" />
+                  <Mail className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:scale-110 transition-all" />
                   neutron@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">
-                <MapPin className="w-4 h-4 text-purple-500" />
+                <MapPin className="w-4 h-4 text-zinc-600" />
                 India
               </li>
             </ul>
@@ -216,7 +216,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:border-blue-500/50 hover:text-blue-500 hover:bg-blue-500/10 transition-all duration-300"
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:border-white/50 hover:text-white hover:bg-white/5 transition-all duration-300"
                 aria-label={social.name}
               >
                 {social.icon}
@@ -235,7 +235,7 @@ export default function Footer() {
             className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
           >
             <span className="text-sm">Back to top</span>
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-300">
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 group-hover:border-white/50 group-hover:bg-white/10 transition-all duration-300">
               <ArrowUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
             </div>
           </button>

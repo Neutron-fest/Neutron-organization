@@ -6,7 +6,7 @@ import { AnimatedText } from "@/components/ui/animated-heading";
 // Noise texture overlay
 function NoiseOverlay() {
   return (
-    <div 
+    <div
       className="absolute inset-0 pointer-events-none opacity-[0.015] mix-blend-overlay"
       style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
@@ -20,28 +20,28 @@ function RollingNumber({ value, suffix = "" }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [displayed, setDisplayed] = useState(0);
-  
+
   useEffect(() => {
     if (!isInView) return;
-    
+
     let start = 0;
     const duration = 2000;
     const startTime = performance.now();
-    
+
     const animate = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function - easeOutExpo
       const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      
+
       setDisplayed(Math.floor(eased * value));
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     };
-    
+
     requestAnimationFrame(animate);
   }, [isInView, value]);
 
@@ -70,14 +70,14 @@ function Sparkline({ data, width = 80, height = 24, color = "#52525b" }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
-  
+
   const points = data.map((v, i) => ({
     x: (i / (data.length - 1)) * width,
     y: height - ((v - min) / range) * height * 0.8 - height * 0.1,
   }));
-  
+
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  
+
   return (
     <svg width={width} height={height} className="overflow-visible">
       <motion.path
@@ -197,16 +197,16 @@ function AdvancedChart({ data }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const [hoveredSeries, setHoveredSeries] = useState(null);
   const chartRef = useRef(null);
-  
+
   const chartWidth = 500;
   const chartHeight = 280;
   const padding = { top: 40, right: 20, bottom: 50, left: 60 };
-  
+
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
-  
+
   const maxValue = Math.max(...data.flatMap(d => [d.participants, d.engagement]));
-  
+
   const points = useMemo(() => {
     return data.map((d, i) => ({
       x: padding.left + (i / (data.length - 1)) * innerWidth,
@@ -215,27 +215,27 @@ function AdvancedChart({ data }) {
       ...d,
     }));
   }, [data, maxValue, innerWidth, innerHeight]);
-  
+
   const createPath = useCallback((series) => {
     const yKey = series === 'participants' ? 'y1' : 'y2';
     if (points.length < 2) return '';
-    
+
     let path = `M ${points[0].x} ${points[0][yKey]}`;
-    
+
     for (let i = 1; i < points.length; i++) {
       const prev = points[i - 1];
       const curr = points[i];
       const tension = 0.4;
-      
+
       const cp1x = prev.x + (curr.x - prev.x) * tension;
       const cp2x = curr.x - (curr.x - prev.x) * tension;
-      
+
       path += ` C ${cp1x} ${prev[yKey]}, ${cp2x} ${curr[yKey]}, ${curr.x} ${curr[yKey]}`;
     }
-    
+
     return path;
   }, [points]);
-  
+
   const participantsPath = createPath('participants');
   const engagementPath = createPath('engagement');
 
@@ -268,7 +268,7 @@ function AdvancedChart({ data }) {
           </button>
         </div>
       </div>
-      
+
       {/* Chart */}
       <div className="flex-1 relative min-h-[250px] sm:min-h-[280px]" ref={chartRef}>
         <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="xMinYMid meet">
@@ -278,7 +278,7 @@ function AdvancedChart({ data }) {
               <stop offset="100%" stopColor="rgba(161, 161, 170, 0)" />
             </linearGradient>
           </defs>
-          
+
           {/* Y-axis grid */}
           {[0, 0.25, 0.5, 0.75, 1].map((tick, i) => {
             const y = padding.top + innerHeight * (1 - tick);
@@ -305,7 +305,7 @@ function AdvancedChart({ data }) {
               </g>
             );
           })}
-          
+
           {/* Area fill */}
           <motion.path
             d={participantsPath + ` L ${points[points.length - 1]?.x} ${padding.top + innerHeight} L ${points[0]?.x} ${padding.top + innerHeight} Z`}
@@ -315,7 +315,7 @@ function AdvancedChart({ data }) {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           />
-          
+
           {/* Lines */}
           <motion.path
             d={participantsPath}
@@ -330,7 +330,7 @@ function AdvancedChart({ data }) {
             viewport={{ once: true }}
             style={{ opacity: hoveredSeries === 'engagement' ? 0.3 : 1 }}
           />
-          
+
           <motion.path
             d={engagementPath}
             fill="none"
@@ -345,7 +345,7 @@ function AdvancedChart({ data }) {
             viewport={{ once: true }}
             style={{ opacity: hoveredSeries === 'participants' ? 0.3 : 1 }}
           />
-          
+
           {/* Interactive points */}
           {points.map((point, i) => (
             <g key={i}>
@@ -360,7 +360,7 @@ function AdvancedChart({ data }) {
                 onMouseLeave={() => setActiveIndex(null)}
                 style={{ cursor: 'pointer' }}
               />
-              
+
               {/* Vertical line on hover */}
               {activeIndex === i && (
                 <motion.line
@@ -374,7 +374,7 @@ function AdvancedChart({ data }) {
                   animate={{ opacity: 1 }}
                 />
               )}
-              
+
               {/* Points */}
               <motion.circle
                 cx={point.x}
@@ -388,7 +388,7 @@ function AdvancedChart({ data }) {
                 transition={{ duration: 0.3, delay: 1.2 + i * 0.05 }}
                 viewport={{ once: true }}
               />
-              
+
               {/* Tooltip */}
               {activeIndex === i && (() => {
                 const tooltipWidth = 110;
@@ -421,7 +421,7 @@ function AdvancedChart({ data }) {
                   </motion.g>
                 );
               })()}
-              
+
               <text
                 x={point.x}
                 y={chartHeight - 15}
@@ -446,7 +446,7 @@ function RadarChart({ data }) {
   const center = size / 2;
   const radius = 70;
   const angleStep = (2 * Math.PI) / data.length;
-  
+
   const points = useMemo(() => {
     return data.map((d, i) => {
       const angle = i * angleStep - Math.PI / 2;
@@ -460,7 +460,7 @@ function RadarChart({ data }) {
       };
     });
   }, [data, angleStep]);
-  
+
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
 
   return (
@@ -480,7 +480,7 @@ function RadarChart({ data }) {
             strokeWidth="1"
           />
         ))}
-        
+
         {/* Axes */}
         {data.map((_, i) => {
           const angle = i * angleStep - Math.PI / 2;
@@ -496,7 +496,7 @@ function RadarChart({ data }) {
             />
           );
         })}
-        
+
         {/* Data shape */}
         <motion.polygon
           points={points.map(p => `${p.x},${p.y}`).join(' ')}
@@ -509,7 +509,7 @@ function RadarChart({ data }) {
           viewport={{ once: true }}
           style={{ transformOrigin: 'center' }}
         />
-        
+
         {/* Points */}
         {points.map((point, i) => (
           <motion.circle
@@ -526,7 +526,7 @@ function RadarChart({ data }) {
             viewport={{ once: true }}
           />
         ))}
-        
+
         {/* Labels */}
         {points.map((point, i) => (
           <text
@@ -554,9 +554,9 @@ function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
   const strokeWidth = isMobile ? 6 : 8;
   const radius = (actualSize - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  
+
   return (
-    <motion.div 
+    <motion.div
       className="flex flex-col items-center"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -603,7 +603,7 @@ function ProgressRing({ value, label, sublabel, size = 120, mobileSize = 90 }) {
 // Horizontal bar with label
 function HorizontalMetric({ label, value, maxValue, index }) {
   const percentage = (value / maxValue) * 100;
-  
+
   return (
     <motion.div
       className="group"
@@ -665,7 +665,7 @@ export default function Impact() {
     { year: "2024", participants: 5200, engagement: 4500 },
     { year: "2025", participants: 7000, engagement: 6200 },
   ];
-  
+
   const radarData = [
     { label: "Tech", value: 92 },
     { label: "Design", value: 78 },
@@ -673,7 +673,7 @@ export default function Impact() {
     { label: "Research", value: 85 },
     { label: "Community", value: 95 },
   ];
-  
+
   const timelineEvents = [
     { year: "2025", title: "Global Summit Launch", value: "12 countries" },
     { year: "2024", title: "5000 members milestone", value: "+45% growth" },
@@ -687,7 +687,7 @@ export default function Impact() {
       className="relative w-screen min-h-screen bg-[#0a0a0a] py-24 px-4 md:px-8 lg:px-16 overflow-hidden"
     >
       <NoiseOverlay />
-      
+
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -698,7 +698,7 @@ export default function Impact() {
           viewport={{ once: true }}
         >
           <div>
-            <motion.div 
+            <motion.div
               className="flex items-center gap-3 mb-4"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -708,15 +708,15 @@ export default function Impact() {
               <span className="text-zinc-600 text-xs uppercase tracking-[0.2em]">Analytics</span>
               <LiveIndicator />
             </motion.div>
-            
+
             <AnimatedText
               className="text-zinc-100 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight"
-              highlightColor="linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)"
+              highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
             >
               Our Impact
             </AnimatedText>
           </div>
-          
+
           <p className="text-zinc-500 text-sm max-w-full md:max-w-sm md:text-right leading-relaxed">
             Real-time metrics tracking our community growth and engagement across all platforms.
           </p>
@@ -732,7 +732,7 @@ export default function Impact() {
             trend="up"
             trendValue="+23%"
             sparkData={[500, 1200, 2100, 3500, 5200, 7000]}
-            accent="#818cf8"
+            accent="#d4d4d8"
           />
           <HeroStat
             value={50}
@@ -741,7 +741,7 @@ export default function Impact() {
             trend="up"
             trendValue="+12"
             sparkData={[8, 15, 24, 35, 42, 50]}
-            accent="#34d399"
+            accent="#a1a1aa"
           />
           <HeroStat
             value={100}
@@ -750,7 +750,7 @@ export default function Impact() {
             sparkData={[20, 35, 52, 70, 85, 100]}
             trendValue="+10"
             trend="up"
-            accent="#fbbf24"
+            accent="#71717a"
           />
           <HeroStat
             value={25}
@@ -759,9 +759,9 @@ export default function Impact() {
             trend="up"
             trendValue="+5"
             sparkData={[3, 7, 12, 16, 20, 25]}
-            accent="#f472b6"
+            accent="#52525b"
           />
-          
+
           {/* Main Chart - Row 2 */}
           <motion.div
             className="lg:col-span-3 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80 min-h-[350px] sm:min-h-[400px]"
@@ -772,7 +772,7 @@ export default function Impact() {
           >
             <AdvancedChart data={chartData} />
           </motion.div>
-          
+
           {/* Timeline - Row 2 */}
           <motion.div
             className="bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
@@ -788,7 +788,7 @@ export default function Impact() {
               ))}
             </div>
           </motion.div>
-          
+
           {/* Radar Chart - Row 3 */}
           <motion.div
             className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
@@ -805,7 +805,7 @@ export default function Impact() {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Progress Rings - Row 3 */}
           <motion.div
             className="lg:col-span-2 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
@@ -821,7 +821,7 @@ export default function Impact() {
               <ProgressRing value={95} label="Growth" sublabel="vs target" />
             </div>
           </motion.div>
-          
+
           {/* Horizontal Metrics - Row 4 */}
           <motion.div
             className="lg:col-span-4 bg-zinc-950/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-zinc-900/80"
