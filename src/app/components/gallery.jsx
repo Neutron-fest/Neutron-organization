@@ -8,52 +8,52 @@ const galleryItems = [
   {
     id: 1,
     className: "col-span-2 row-span-2 lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3",
-    image: "https://picsum.photos/seed/neutron1/800/800",
+    image: "/Gallery/20250413_195125.jpg",
   },
   {
     id: 2,
     className: "col-span-1 row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
-    image: "https://picsum.photos/seed/neutron2/400/400",
+    image: "/Gallery/20250413_195722.jpg",
   },
   {
     id: 3,
     className: "col-span-1 row-span-1 lg:col-start-4 lg:col-end-5 lg:row-start-1 lg:row-end-2",
-    image: "https://picsum.photos/seed/neutron3/400/400",
+    image: "/Gallery/ARS06099.JPG",
   },
   {
     id: 4,
     className: "col-span-2 row-span-2 lg:col-start-5 lg:col-end-7 lg:row-start-1 lg:row-end-3",
-    image: "https://picsum.photos/seed/neutron4/800/800",
+    image: "/Gallery/ARS06503.JPG",
   },
   {
     id: 5,
     className: "col-span-2 sm:col-span-1 lg:col-span-2 row-span-1 lg:col-start-3 lg:col-end-5 lg:row-start-2 lg:row-end-3",
-    image: "https://picsum.photos/seed/neutron5/800/400",
+    image: "/Gallery/ARS07087.JPG",
   },
   {
     id: 6,
     className: "col-span-2 row-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
-    image: "https://picsum.photos/seed/neutron6/800/400",
+    image: "/Gallery/ARS07116.JPG",
   },
   {
     id: 7,
     className: "col-span-1 row-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
-    image: "https://picsum.photos/seed/neutron7/400/400",
+    image: "/Gallery/ARS07327.JPG",
   },
   {
     id: 8,
     className: "col-span-1 row-span-1 lg:col-start-4 lg:col-end-5 lg:row-start-3 lg:row-end-4",
-    image: "https://picsum.photos/seed/neutron8/400/400",
+    image: "/Gallery/dj.webp",
   },
   {
     id: 9,
     className: "col-span-1 row-span-1 lg:col-start-5 lg:col-end-6 lg:row-start-3 lg:row-end-4",
-    image: "https://picsum.photos/seed/neutron9/400/400",
+    image: "/Gallery/Gaurav.webp",
   },
   {
     id: 10,
     className: "col-span-1 row-span-1 lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-4",
-    image: "https://picsum.photos/seed/neutron10/400/400",
+    image: "/Gallery/Show.webp",
   },
 ];
 
