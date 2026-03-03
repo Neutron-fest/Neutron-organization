@@ -39,6 +39,13 @@ export default function Team() {
       image:
         "https://cdn.prod.website-files.com/62e8d2ea218fb7676b6892a6/683511d2d519ae1be1e25617_image%204632.avif",
     },
+    {
+      id: 5,
+      name: "Vishesh Rao",
+      role: "Transportation",
+      image:
+        "https://media.licdn.com/dms/image/v2/D5603AQEXBFgrZx3R7w/profile-displayphoto-shrink_400_400/B56ZQ6fcIRHIAk-/0/1736148108567?e=1773878400&v=beta&t=92vNq3BZVHhIXpO0dwvDDNtLQ9UY8pwcb_ZddREhpzE",
+    },
   ];
 
   // Duplicate for seamless infinite scroll
