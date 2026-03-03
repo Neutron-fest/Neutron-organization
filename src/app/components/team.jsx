@@ -39,13 +39,6 @@ export default function Team() {
       image:
         "https://cdn.prod.website-files.com/62e8d2ea218fb7676b6892a6/683511d2d519ae1be1e25617_image%204632.avif",
     },
-    {
-      id: 6,
-      name: "Satyarth",
-      role: "Partner Management",
-      image:
-        "https://cdn.prod.website-files.com/62e8d2ea218fb7676b6892a6/683511d2c8956871555a8233_image%204603.avif",
-    },
   ];
 
   // Duplicate for seamless infinite scroll
