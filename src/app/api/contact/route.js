@@ -1,24 +1,26 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(request) {
   try {
     const { name, email, subject, message } = await request.json();
-    
+
     // Validate required fields
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { success: false, message: 'All fields are required' },
-        { status: 400 }
+        { success: false, message: "All fields are required" },
+        { status: 400 },
       );
     }
 
     // Create transporter
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: "smtp.hostinger.com",
+      port: 465, // 465 for SSL, 587 for TLS
+      secure: true, // true if using 465
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.EMAIL_USER, // full email address
+        pass: process.env.EMAIL_PASSWORD, // email account password
       },
     });
 
@@ -156,7 +158,7 @@ export async function POST(request) {
                           </tr>
                           <tr>
                             <td style="color: #555; font-size: 14px; font-weight: 600; width: 120px; vertical-align: top;">Date:</td>
-                            <td style="color: #333; font-size: 14px;">${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</td>
+                            <td style="color: #333; font-size: 14px;">${new Date().toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" })}</td>
                           </tr>
                         </table>
                       </div>
@@ -194,18 +196,18 @@ export async function POST(request) {
     // Send both emails
     await Promise.all([
       transporter.sendMail(mailOptions), // Confirmation to user
-      transporter.sendMail(adminMailOptions) // Notification to admin
+      transporter.sendMail(adminMailOptions), // Notification to admin
     ]);
 
     return NextResponse.json(
-      { success: true, message: 'Email sent successfully' },
-      { status: 200 }
+      { success: true, message: "Email sent successfully" },
+      { status: 200 },
     );
   } catch (error) {
-    console.error('Email error:', error);
+    console.error("Email error:", error);
     return NextResponse.json(
-      { success: false, message: 'Failed to send email. Please try again.' },
-      { status: 500 }
+      { success: false, message: "Failed to send email. Please try again." },
+      { status: 500 },
     );
   }
 }
