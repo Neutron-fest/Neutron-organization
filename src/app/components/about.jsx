@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import AnimatedHeading from "@/components/ui/animated-heading";
 
 const OFFERINGS = [
   {
@@ -34,8 +35,8 @@ export default function About() {
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
   
   const { scrollYProgress } = useScroll({
@@ -53,7 +54,7 @@ export default function About() {
     <section 
       id="about" 
       ref={containerRef}
-      className="relative bg-[#050505] text-white py-32 md:py-40 overflow-hidden selection:bg-white selection:text-black"
+      className="relative bg-[#050505] text-white pt-32 md:pt-40 pb-12 md:pb-24 overflow-hidden selection:bg-white selection:text-black"
     >
       <div 
         className="absolute inset-0 z-0 opacity-20 mix-blend-overlay pointer-events-none" 
@@ -64,7 +65,7 @@ export default function About() {
       
       <motion.div 
         style={{ y: yBg1 }}
-        className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-indigo-500/4 blur-[150px] rounded-full pointer-events-none" 
+        className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-zinc-300/5 blur-[150px] rounded-full pointer-events-none" 
       />
       
       <motion.div 
@@ -72,7 +73,7 @@ export default function About() {
         className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-white/3 blur-[120px] rounded-full pointer-events-none" 
       />
 
-      <div className="max-w-7xl mx-auto mb-40 px-6 md:px-12 lg:px-24 relative z-10">
+      <div className="relative z-10 mx-auto mb-24 max-w-7xl px-6 md:mb-40 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +90,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="text-[clamp(3.5rem,10vw,12rem)] font-['Greater_Theory'] leading-[0.85] uppercase tracking-tighter mb-16 relative"
+          className="relative mb-12 text-5xl md:text-9xl leading-[0.85] tracking-tighter uppercase font-['Greater_Theory'] md:mb-16"
         >
           Architecting <br />
           <span className="text-zinc-600 block mt-2 relative overflow-hidden">
@@ -102,18 +103,18 @@ export default function About() {
               The Future
             </motion.span>
           </span>
-          <br />Of Technology
+          Of Technology
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-2xl md:text-5xl font-['Telegraf'] font-light leading-tight text-zinc-300"
+            className="text-xl leading-tight text-zinc-300 font-['Telegraf'] md:text-5xl"
           >
-            Neutron is a catalyst. We bridge the gap between academic theory and industrial impact through <span className="text-white font-bold italic border-b border-indigo-500/30 hover:border-indigo-500 transition-colors duration-500">intense engineering</span>.
+            Neutron is a catalyst. We bridge the gap between academic theory and industrial impact through <span className="text-white font-bold italic border-b border-zinc-500/30 hover:border-zinc-300 transition-colors duration-500">intense engineering</span>.
           </motion.p>
 
           <motion.div
@@ -121,9 +122,9 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-end h-full"
+            className="flex h-full flex-col justify-end"
           >
-            <p className="text-xl text-zinc-500 font-['Telegraf'] max-w-md mb-8 leading-relaxed">
+            <p className="mb-8 max-w-md text-lg leading-relaxed text-zinc-500 font-['Telegraf'] md:text-xl">
               We foster an environment where elite developers and technical architects converge to deconstruct and rebuild the global digital infrastructure.
             </p>
             <motion.div 
@@ -134,25 +135,25 @@ export default function About() {
         </div>
       </div>
 
-      <div className="relative w-full py-40 border-y border-white/8 bg-zinc-950/50 overflow-hidden isolate my-20 md:my-40 backdrop-blur-sm">
+      <div className="relative isolate my-20 w-full overflow-hidden border-y border-white/8 bg-zinc-950/50 py-28 backdrop-blur-sm md:my-40 md:py-40">
         
         <motion.div 
           style={{ opacity: opacityText, scale: scaleText }}
           className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none select-none mix-blend-overlay z-0"
         >
-          <h1 className="text-[38vw] md:text-[30vw] leading-[0.75] font-['Greater_Theory'] uppercase text-white/40 whitespace-nowrap">CORE</h1>
-          <h1 className="text-[38vw] md:text-[30vw] leading-[0.75] font-['Greater_Theory'] uppercase text-white/40 whitespace-nowrap ml-32">OFFE</h1>
-          <h1 className="text-[38vw] md:text-[30vw] leading-[0.75] font-['Greater_Theory'] uppercase text-white/40 whitespace-nowrap -ml-32">RINGS</h1>
+          <h1 className="text-[38vw] leading-[0.75] whitespace-nowrap text-white/40 uppercase font-['Greater_Theory'] md:text-[30vw]">CORE</h1>
+          <h1 className="ml-0 text-[38vw] leading-[0.75] whitespace-nowrap text-white/40 uppercase font-['Greater_Theory'] md:ml-32 md:text-[30vw]">OFFE</h1>
+          <h1 className="ml-0 text-[38vw] leading-[0.75] whitespace-nowrap text-white/40 uppercase font-['Greater_Theory'] md:-ml-32 md:text-[30vw]">RINGS</h1>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto w-full flex flex-col xl:flex-row relative z-10 px-6 md:px-12 lg:px-24">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col overflow-hidden px-6 md:px-12 lg:px-24 xl:flex-row">
           
-          <div className="flex-1 flex flex-col justify-center xl:justify-end xl:pb-24 mb-16 xl:mb-0 z-20">
+          <div className="z-20 mb-12 flex flex-1 flex-col justify-center xl:mb-0 xl:justify-end xl:pb-24">
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-['Greater_Theory'] uppercase leading-[0.9] text-white mb-8 tracking-tighter drop-shadow-2xl"
+              className="mb-6 text-4xl leading-[0.9] tracking-tighter text-white uppercase drop-shadow-2xl font-['Greater_Theory'] md:mb-8 md:text-7xl"
             >
               Multiple Types <br />
               <span className="text-zinc-500">Of Offerings</span>
@@ -161,19 +162,18 @@ export default function About() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-2xl text-zinc-400 font-['Telegraf'] max-w-sm leading-relaxed"
+              className="max-w-sm text-base leading-relaxed text-zinc-400 font-['Telegraf'] md:text-2xl"
             >
               Speed up your innovation <br />
               with these tools for elite generation.
             </motion.p>
           </div>
 
-          <div className="flex-2 flex flex-row items-center justify-start lg:justify-center min-w-[600px] min-h-[500px] relative mt-10 xl:mt-0 xl:ml-10">
+          <div className="relative mt-6 flex w-full min-w-0 min-h-[400px] flex-row items-center justify-center md:mt-10 md:min-h-[500px] xl:mt-0 xl:ml-10">
             {OFFERINGS.map((item, idx) => {
               const isActive = activeIdx === idx;
               const distance = Math.abs(idx - activeIdx);
               const isLeft = idx < activeIdx;
-              const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
               
               return (
                 <motion.div
@@ -182,15 +182,17 @@ export default function About() {
                   layout
                   initial={false}
                   animate={{
-                    width: isActive ? "min(90vw, 420px)" : "min(40vw, 240px)",
-                    height: isActive ? 460 : 320,
+                    width: isActive
+                      ? (isMobile ? "72vw" : "min(90vw, 420px)")
+                      : (isMobile ? "16vw" : "min(32vw, 200px)"),
+                    height: isActive ? (isMobile ? 360 : 460) : (isMobile ? 220 : 300),
                     zIndex: isActive ? 50 : 40 - distance,
-                    x: isActive ? 0 : isLeft ? distance * 20 : distance * -20,
-                    y: isActive ? -20 : 0,
+                    x: isActive ? 0 : isLeft ? distance * (isMobile ? 5 : 20) : distance * (isMobile ? -5 : -20),
+                    y: isActive ? (isMobile ? -10 : -20) : 0,
                     opacity: isActive ? 1 : 0.85 - (distance * 0.15)
                   }}
                   whileHover={{
-                    y: isActive ? -20 : -10,
+                    y: isActive ? (isMobile ? -5 : -20) : -5,
                     opacity: 1
                   }}
                   transition={{ type: "spring", stiffness: 200, damping: 25, mass: 1 }}
@@ -200,16 +202,16 @@ export default function About() {
                       : 'bg-[#1a1a1c]/80 border border-white/15 backdrop-blur-xl hover:bg-[#222225]/90'
                     }`}
                   style={{
-                    marginLeft: idx === 0 ? 0 : isMobile ? (isActive ? -30 : -50) : (isActive ? -70 : -120),
-                    borderRadius: "32px"
+                    marginLeft: idx === 0 ? 0 : isMobile ? (isActive ? -12 : -20) : (isActive ? -70 : -120),
+                    borderRadius: isMobile ? "24px" : "32px"
                   }}
                 >
-                  <div className="p-8 md:p-10 h-full flex flex-col justify-between relative z-10">
+                  <div className="p-12 md:p-10 h-full w-full flex flex-col justify-between relative z-10">
                     
                     <div className="flex justify-between items-start w-full relative z-20">
                       <motion.span 
                         layout="position"
-                        className={`text-sm md:text-base font-['Telegraf'] tracking-[0.3em] ${isActive ? 'text-indigo-300 font-bold' : 'text-zinc-400 group-hover:text-zinc-300'}`}
+                        className={`text-sm md:text-base font-['Telegraf'] tracking-[0.3em] ${isActive ? 'text-zinc-200 font-bold' : 'text-zinc-400 group-hover:text-zinc-300'}`}
                       >
                         / {item.id}
                       </motion.span>
@@ -218,7 +220,7 @@ export default function About() {
                     <div className="flex flex-col gap-5 relative z-20">
                       <motion.h3 
                         layout="position"
-                        className={`text-2xl md:text-3xl font-['Greater_Theory'] leading-[0.9] uppercase ${isActive ? 'text-indigo-300 tracking-widest' : 'text-zinc-400 tracking-normal group-hover:text-zinc-200'}`}
+                        className={`text-xl md:text-3xl font-['Greater_Theory'] leading-[0.9] uppercase ${isActive ? 'text-zinc-200 tracking-widest' : 'text-zinc-400 tracking-normal group-hover:text-zinc-200'}`}
                       >
                         {item.title.split(' ').map((word, i) => (
                           <span key={i} className="block">{word}</span>
@@ -234,20 +236,20 @@ export default function About() {
                             transition={{ duration: 0.4, ease: "easeOut" }}
                             className="overflow-hidden mt-2"
                           >
-                            <p className="text-sm md:text-sm font-['Telegraf'] text-zinc-300 leading-relaxed pr-2 md:pr-10">
+                            <p className="text-xs md:text-sm font-['Telegraf'] text-zinc-300 leading-relaxed pr-2 md:pr-10">
                               {item.desc}
                             </p>
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
-                    <div className={`absolute inset-0 bg-linear-to-t pointer-events-none transition-opacity duration-700 ${isActive ? 'from-grey-900/20 via-black/40 to-transparent opacity-100' : 'from-black/80 via-transparent to-transparent opacity-50'}`} />
+                    <div className={`absolute inset-0 bg-linear-to-t pointer-events-none transition-opacity duration-700 ${isActive ? 'from-zinc-900/40 via-black/40 to-transparent opacity-100' : 'from-black/80 via-transparent to-transparent opacity-50'}`} />
                   </div>
 
                   {isActive && (
                     <motion.div 
                       layoutId="activeTopBorder"
-                      className="absolute top-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-indigo-500 to-transparent opacity-80"
+                      className="absolute top-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-zinc-300 to-transparent opacity-80"
                     />
                   )}
                 </motion.div>
@@ -257,38 +259,53 @@ export default function About() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto text-center py-32 px-6 mt-10 md:mt-20 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 40 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="space-y-12"
-        >
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-[10px] font-black tracking-[0.5em] text-white/80 uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-            Infinity Vision Protocol
-          </div>
-          <h3 className="text-[clamp(3rem,8vw,7rem)] font-['Greater_Theory'] leading-[0.9] uppercase tracking-tighter">
-            Where logic meets <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-zinc-400 via-zinc-600 to-zinc-400">Human Intuition</span>
-          </h3>
-          <p className="text-xl md:text-4xl text-zinc-400 font-['Telegraf'] font-light max-w-4xl mx-auto leading-relaxed">
-            Empowering the next generation to architect the global technology landscape through discipline and disrupton.
-          </p>
-
+      <div className="max-w-5xl mx-auto text-center px-6 relative z-10">
           <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            whileInView={{ width: "300px", opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
+            initial={{ opacity: 0, scale: 0.95, y: 40 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="h-px bg-linear-to-r from-transparent via-white/30 to-transparent mx-auto mt-24"
-          />
-        </motion.div>
+            className="space-y-12"
+          >
+            <h3 className="text-[clamp(3rem,8vw,7rem)] font-['Greater_Theory'] leading-[0.9] uppercase tracking-tighter flex flex-col items-center justify-center">
+              <span className="overflow-hidden block w-full px-2">
+                <motion.span 
+                  className="block w-full"
+                  initial={{ y: "100%", opacity: 0, filter: "blur(10px)" }}
+                  whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Where logic meets
+                </motion.span>
+              </span>
+              <span className="overflow-hidden block mt-1 md:mt-2 w-full px-2">
+                <motion.span 
+                  className="block w-full pb-4"
+                  initial={{ y: "100%", opacity: 0, rotateX: -20, filter: "blur(10px)" }}
+                  whileInView={{ y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 1.4, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ transformOrigin: "top center", willChange: "transform, opacity" }}
+                >
+                  <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-zinc-500 via-zinc-200 to-zinc-500 py-1">
+                    Human Intuition
+                  </span>
+                </motion.span>
+              </span>
+            </h3>
+            <p className="text-xl md:text-3xl text-zinc-400 font-['Telegraf'] font-light max-w-4xl mx-auto leading-relaxed">
+              Empowering the next generation to architect the global technology landscape through discipline and disruption.
+            </p>
+
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              whileInView={{ width: "300px", opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
+              viewport={{ once: true }}
+              className="h-px bg-linear-to-r from-transparent via-white/30 to-transparent mx-auto mt-24"
+            />
+          </motion.div>
       </div>
 
     </section>
   );
 }
-
-

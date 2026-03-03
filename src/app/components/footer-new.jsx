@@ -82,7 +82,7 @@ export default function Footer() {
     >
       {/* Background gradient glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-gradient-to-br from-white/10 via-zinc-500/5 to-transparent blur-3xl"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-linear-to-br from-white/10 via-zinc-500/5 to-transparent blur-3xl"></div>
       </div>
 
       {/* Large background text with hover effect */}
@@ -156,8 +156,8 @@ export default function Footer() {
           {/* Brand section */}
           <div className="md:col-span-1">
             <a href="#home" className="inline-flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                <span className="text-black font-black">N</span>
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <img src="/neutron.png" alt="Neutron Logo" />
               </div>
               <span className="text-white font-['Greater_Theory'] text-2xl tracking-tighter uppercase">
                 Neutron

@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex flex-row w-screen p-3 sm:p-5 justify-between fixed top-0 z-50">
+      <div className="fixed top-0 left-0 z-50 flex w-full flex-row justify-between p-3 sm:p-5">
         <motion.div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => scrollToSection("#home")}
@@ -48,7 +48,7 @@ export default function Navbar() {
           </span>
         </motion.div>
         <Button
-          className="bg-black outline-none cursor-pointer hover:bg-gray-800 rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-xs sm:text-sm md:text-md px-2 sm:px-4 border border-gray-600"
+          className="bg-black outline-none cursor-pointer hover:bg-gray-800 rounded-4xl w-auto sm:w-[15%] md:w-[10%] lg:w-[6%] text-[8px] sm:text-sm md:text-[10px] px-2 sm:px-4 border border-gray-600"
           onClick={() => {
             setIsOpen(!isOpen);
             setMenu(isOpen ? "Menu" : "Close");
@@ -64,7 +64,7 @@ export default function Navbar() {
       </div>
       {isOpen ? (
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 md:grid-col-2 fixed w-screen h-screen top-0 bg-black overflow-y-auto z-40"
+          className="fixed top-0 left-0 z-40 grid h-screen w-full grid-cols-1 bg-black overflow-y-auto md:grid-cols-2 lg:grid-cols-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function Navbar() {
               <p className="text-gray-400 text-base sm:text-lg md:text-[20px] mt-30">
                 Get in Touch
               </p>
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[30px] break-all">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[30px] break-all pb-4">
                 Neutron@gmail.com
               </h1>
             </div>

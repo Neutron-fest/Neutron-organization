@@ -56,7 +56,7 @@ export default function Hero() {
       />
 
       {/* SUBTLE SCANLINE OVERLAY */}
-      <div className="fixed inset-0 z-45 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%)] bg-[length:100%_4px] opacity-20" />
+      <div className="fixed inset-0 z-45 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%)] bg-size-[100%_4px] opacity-20" />
 
       {/* 4. INDUSTRIAL HUD (Classy/Professional) */}
       <motion.div
@@ -86,7 +86,7 @@ export default function Hero() {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-center gap-4"
           >
-            <div className="w-px h-16 bg-gradient-to-t from-white/30 to-transparent" />
+            <div className="w-px h-16 bg-linear-to-t from-white/30 to-transparent" />
             <div className="text-[8px] font-mono text-white/20 tracking-[0.6em] uppercase">
               Scroll to Deconstruct
             </div>
@@ -145,11 +145,9 @@ export default function Hero() {
 }
 
 function Blade({ blade, progress }) {
-  // Start the blade slide at 15% scroll
   const start = 0.15;
   const end = 0.85;
 
-  // Each blade slides in its specific direction (Up or Down)
   const yTranslate = useTransform(
     progress,
     [start + blade.delay, end],
@@ -170,8 +168,10 @@ function Blade({ blade, progress }) {
         opacity,
         scaleY: scale,
         width: `${100 / BLADE_COUNT}%`,
+        WebkitMaskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / BLADE_COUNT}vw - 1px), transparent calc(${100 / BLADE_COUNT}vw - 1px), transparent ${100 / BLADE_COUNT}vw)`,
+        maskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / BLADE_COUNT}vw - 1px), transparent calc(${100 / BLADE_COUNT}vw - 1px), transparent ${100 / BLADE_COUNT}vw)`,
       }}
-      className="relative h-full overflow-hidden will-change-transform"
+      className="relative flex-1 h-full overflow-hidden will-change-transform"
     >
       <video
         autoPlay
@@ -180,8 +180,8 @@ function Blade({ blade, progress }) {
         playsInline
         className="absolute top-0 h-full object-cover max-w-none origin-top"
         style={{
-          width: "100vw",
-          left: `-${(blade.id / BLADE_COUNT) * 100}vw`,
+          width: `${BLADE_COUNT * 100}%`,
+          left: `-${blade.id * 100}%`,
         }}
       >
         <source
@@ -190,8 +190,7 @@ function Blade({ blade, progress }) {
         />
       </video>
 
-      {/* Subtle blade highlight for industrial feel */}
-      <div className="absolute inset-0 border-r border-white/5 bg-gradient-to-tr from-black/20 via-transparent to-black/20 pointer-events-none" />
+      <div className="absolute inset-0 border-r border-white/5 bg-linear-to-tr from-black/20 via-transparent to-black/20 pointer-events-none" />
     </motion.div>
   );
 }

@@ -15,7 +15,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-screen bg-black py-20 px-4 md:px-8 lg:px-12 overflow-hidden">
+    <footer className="relative w-full bg-black py-20 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Large Background Text with Hover Glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <motion.h1
@@ -119,7 +119,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-500 flex-0 mt-1" />
+                <Mail className="w-5 h-5 text-zinc-500 flex-0 mt-1" />
                 <a
                   href="mailto:neutron@gmail.com"
                   className="text-gray-400 hover:text-white transition-colors duration-300 relative z-20 text-sm break-all"
@@ -128,7 +128,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-500 flex-0 mt-1" />
+                <MapPin className="w-5 h-5 text-zinc-500 flex-0 mt-1" />
                 <span className="text-gray-400 text-sm">India</span>
               </li>
             </ul>

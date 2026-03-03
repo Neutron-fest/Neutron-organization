@@ -54,7 +54,7 @@ export default function Team() {
   return (
     <section
       id="team"
-      className="w-screen min-h-screen bg-black py-20 overflow-hidden"
+      className="w-full min-h-screen bg-black py-20 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header Section */}
@@ -82,12 +82,12 @@ export default function Team() {
       {/* Infinite Scroll Carousel */}
       <div className="relative w-full overflow-hidden">
         {/* Left gradient overlay */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-linear-to-r from-black to-transparent z-10 pointer-events-none"></div>
         {/* Right gradient overlay */}
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-linear-to-l from-black to-transparent z-10 pointer-events-none"></div>
 
         <div
-          className="flex gap-6 pl-16 md:pl-24 lg:pl-32 hover:[animation-play-state:paused]"
+          className="flex gap-6 pl-16 md:pl-24 lg:pl-32 hover:paused"
           style={{
             width: "fit-content",
             animation: "scroll 25s linear infinite",
@@ -96,9 +96,9 @@ export default function Team() {
           {duplicatedMembers.map((member, index) => (
             <div
               key={`${member.id}-${index}`}
-              className="w-[280px] sm:w-[300px] md:w-[320px] bg-zinc-900 rounded-3xl overflow-hidden flex-shrink-0"
+              className="w-[280px] sm:w-[300px] md:w-[320px] bg-zinc-900 rounded-3xl overflow-hidden shrink-0"
             >
-              <div className="aspect-[3/4] relative overflow-hidden">
+              <div className="aspect-3/4 relative overflow-hidden">
                 <img
                   src={member.image}
                   alt={member.name}

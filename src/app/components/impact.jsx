@@ -184,7 +184,7 @@ function HeroStat({
 
         <div className="mb-2">
           <h3
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none"
+            className="text-4xl md:text-5xl font-black tracking-tighter leading-none"
             style={{ color: "#f4f4f5" }}
           >
             <RollingNumber value={value} suffix={suffix} />
@@ -297,6 +297,7 @@ function AdvancedChart({ data }) {
           className="w-full h-full"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           preserveAspectRatio="xMinYMid meet"
+          onMouseLeave={() => setActiveIndex(null)}
         >
           <defs>
             <linearGradient
@@ -386,17 +387,30 @@ function AdvancedChart({ data }) {
             <g key={i}>
               {/* Hover zone */}
               <rect
-                x={point.x - innerWidth / data.length / 2}
-                y={padding.top}
-                width={innerWidth / data.length}
-                height={innerHeight}
+                x={
+                  data.length === 1
+                    ? 0
+                    : i === 0
+                    ? 0
+                    : point.x - (point.x - points[i - 1].x) / 2
+                }
+                y={0}
+                width={
+                  data.length === 1
+                    ? chartWidth
+                    : i === 0
+                    ? point.x + (points[i + 1].x - point.x) / 2
+                    : i === data.length - 1
+                    ? chartWidth - (point.x - (point.x - points[i - 1].x) / 2)
+                    : (points[i + 1].x - point.x) / 2 + (point.x - points[i - 1].x) / 2
+                }
+                height={chartHeight}
                 fill="transparent"
                 onMouseEnter={() => setActiveIndex(i)}
-                onMouseLeave={() => setActiveIndex(null)}
                 style={{ cursor: "pointer" }}
               />
 
-              {/* Vertical line on hover */}
+                {/* Vertical line on hover */}
               {activeIndex === i && (
                 <motion.line
                   x1={point.x}
@@ -407,10 +421,11 @@ function AdvancedChart({ data }) {
                   strokeWidth="1"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  className="pointer-events-none"
                 />
               )}
 
-              {/* Points */}
+                {/* Points */}
               <motion.circle
                 cx={point.x}
                 cy={point.y1}
@@ -422,6 +437,7 @@ function AdvancedChart({ data }) {
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.3, delay: 1.2 + i * 0.05 }}
                 viewport={{ once: true }}
+                className="pointer-events-none"
               />
 
               {/* Tooltip */}
@@ -441,6 +457,7 @@ function AdvancedChart({ data }) {
                     <motion.g
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
+                      style={{ pointerEvents: "none" }}
                     >
                       <rect
                         x={tooltipX}
@@ -481,7 +498,7 @@ function AdvancedChart({ data }) {
                 textAnchor="middle"
                 fill={activeIndex === i ? "#a1a1aa" : "#52525b"}
                 fontSize="11"
-                className="transition-colors"
+                className="transition-colors pointer-events-none"
               >
                 {point.year}
               </text>
@@ -773,7 +790,7 @@ export default function Impact() {
   return (
     <section
       id="analytics"
-      className="relative w-screen min-h-screen bg-[#0a0a0a] py-24 px-4 md:px-8 lg:px-16 overflow-hidden"
+      className="relative w-full min-h-screen bg-[#0a0a0a] py-24 px-4 md:px-8 lg:px-16 overflow-hidden"
     >
       <NoiseOverlay />
 

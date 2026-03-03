@@ -84,7 +84,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-screen min-h-screen bg-black py-20 px-4 md:px-8 lg:px-12"
+      className="w-full min-h-screen bg-black py-20 px-4 md:px-8 lg:px-12"
     >
       {/* Notification */}
       {notification.show && (
@@ -119,7 +119,7 @@ export default function Contact() {
             highlightWords={["talking", "do"]}
             highlightColor="linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #71717a 100%)"
           >
-            Interested in talking, let's do it.
+            Interested in talking, let&apos;s do it.
           </AnimatedHeading>
         </div>
 
@@ -140,7 +140,7 @@ export default function Contact() {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-zinc-500 transition-colors"
                   required
                 />
               </div>
@@ -152,7 +152,7 @@ export default function Contact() {
                   placeholder="Your Email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-zinc-500 transition-colors"
                   required
                 />
               </div>
@@ -164,7 +164,7 @@ export default function Contact() {
                   placeholder="Subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-zinc-500 transition-colors"
                   required
                 />
               </div>
@@ -176,7 +176,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                  className="w-full bg-black border border-zinc-700 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-zinc-500 transition-colors resize-none"
                   required
                 />
               </div>
