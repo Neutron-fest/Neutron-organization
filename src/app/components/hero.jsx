@@ -1,12 +1,29 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-const BLADE_COUNT = 12;
+const DEFAULT_BLADE_COUNT = 12;
+const MOBILE_BLADE_COUNT = 6;
 
 export default function Hero() {
   const sectionRef = useRef(null);
+  const [bladeCount, setBladeCount] = useState(DEFAULT_BLADE_COUNT);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setBladeCount(MOBILE_BLADE_COUNT);
+      } else {
+        setBladeCount(DEFAULT_BLADE_COUNT);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -35,14 +52,14 @@ export default function Hero() {
 
   // 3. GENERATE BLADES
   const blades = useMemo(() => {
-    return Array.from({ length: BLADE_COUNT }).map((_, i) => ({
+    return Array.from({ length: bladeCount }).map((_, i) => ({
       id: i,
       // Alternating direction: odd blades go UP, even blades go DOWN
       direction: i % 2 === 0 ? -1 : 1,
       // Staggered delay based on index
-      delay: Math.abs(i - (BLADE_COUNT - 1) / 2) * 0.04,
+      delay: Math.abs(i - (bladeCount - 1) / 2) * 0.04,
     }));
-  }, []);
+  }, [bladeCount]);
 
   return (
     <section
@@ -124,7 +141,12 @@ export default function Hero() {
         {/* CINEMATIC APERTURE BLADES */}
         <div className="absolute inset-0 z-20 w-full h-full flex overflow-hidden">
           {blades.map((blade) => (
-            <Blade key={blade.id} blade={blade} progress={smoothProgress} />
+            <Blade
+              key={blade.id}
+              blade={blade}
+              progress={smoothProgress}
+              bladeCount={bladeCount}
+            />
           ))}
         </div>
 
@@ -144,7 +166,7 @@ export default function Hero() {
   );
 }
 
-function Blade({ blade, progress }) {
+function Blade({ blade, progress, bladeCount }) {
   const start = 0.15;
   const end = 0.85;
 
@@ -167,9 +189,9 @@ function Blade({ blade, progress }) {
         y: yTranslate,
         opacity,
         scaleY: scale,
-        width: `${100 / BLADE_COUNT}%`,
-        WebkitMaskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / BLADE_COUNT}vw - 1px), transparent calc(${100 / BLADE_COUNT}vw - 1px), transparent ${100 / BLADE_COUNT}vw)`,
-        maskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / BLADE_COUNT}vw - 1px), transparent calc(${100 / BLADE_COUNT}vw - 1px), transparent ${100 / BLADE_COUNT}vw)`,
+        width: `${100 / bladeCount}%`,
+        WebkitMaskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / bladeCount}vw - 1px), transparent calc(${100 / bladeCount}vw - 1px), transparent ${100 / bladeCount}vw)`,
+        maskImage: `repeating-linear-gradient(to bottom, #000 0, #000 calc(${100 / bladeCount}vw - 1px), transparent calc(${100 / bladeCount}vw - 1px), transparent ${100 / bladeCount}vw)`,
       }}
       className="relative flex-1 h-full overflow-hidden will-change-transform"
     >
@@ -178,10 +200,11 @@ function Blade({ blade, progress }) {
         muted
         loop
         playsInline
-        className="absolute top-0 h-full object-cover max-w-none origin-top"
+        className="absolute top-0 h-full object-cover max-w-none origin-top will-change-[transform,opacity]"
         style={{
-          width: `${BLADE_COUNT * 100}%`,
+          width: `${bladeCount * 100}%`,
           left: `-${blade.id * 100}%`,
+          transform: "translateZ(0)", // Force GPU hardware acceleration
         }}
       >
         <source

@@ -87,9 +87,8 @@ export default function Team() {
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-linear-to-l from-black to-transparent z-10 pointer-events-none"></div>
 
         <div
-          className="flex gap-6 pl-16 md:pl-24 lg:pl-32 hover:paused"
+          className="flex gap-6 pr-6 w-max hover:paused"
           style={{
-            width: "fit-content",
             animation: "scroll 25s linear infinite",
           }}
         >
