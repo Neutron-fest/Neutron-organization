@@ -210,7 +210,7 @@ export default function Contact() {
               <a
                 href="mailto:
 neutronfest@nst.rishihood.edu.in"
-                className="text-2xl md:text-3xl font-semibold text-white hover:opacity-80 transition-opacity"
+                className="text-xl md:text-3xl font-semibold text-white hover:opacity-80 transition-opacity"
               >
                 neutronfest@nst.rishihood.edu.in
               </a>
