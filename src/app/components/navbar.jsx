@@ -160,7 +160,7 @@ export default function Navbar() {
                 Get in Touch
               </p>
               <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[30px] break-all pb-4">
-                Neutron@gmail.com
+                neutronfest@nst.rishihood.edu.in
               </h1>
             </div>
 
