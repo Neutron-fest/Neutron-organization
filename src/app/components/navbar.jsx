@@ -159,7 +159,7 @@ export default function Navbar() {
               <p className="text-gray-400 text-base sm:text-lg md:text-[20px] mt-30">
                 Get in Touch
               </p>
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[30px] break-all pb-4">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-2xl break-all pb-4">
                 neutronfest@nst.rishihood.edu.in
               </h1>
             </div>
