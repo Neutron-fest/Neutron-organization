@@ -226,12 +226,32 @@ neutronfest@nst.rishihood.edu.in"
             ))}
           </div>
 
-          {/* Copyright */}
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Neutron. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} Neutron. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="/privacy-policy"
+                className="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-wider"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms-of-service"
+                className="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-wider"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="/terms-of-service#refund-policy"
+                className="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-wider"
+              >
+                Refund Policy
+              </a>
+            </div>
+          </div>
 
-          {/* Back to Top */}
           <button
             onClick={scrollToTop}
             className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
